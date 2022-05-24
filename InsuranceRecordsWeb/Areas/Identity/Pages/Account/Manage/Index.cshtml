@@ -12,15 +12,49 @@
         <form id="profile-form" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating">
-                <input asp-for="Username" class="form-control" disabled />
-                <label asp-for="Username" class="form-label"></label>
+                <input asp-for="Input.Name" class="form-control" readonly/>
+                <label asp-for="Input.Name" class="form-label"></label>
+                <span asp-validation-for="Input.Name" class="text-danger"></span>
             </div>
             <div class="form-floating">
-                <input asp-for="Input.PhoneNumber" class="form-control" />
-                <label asp-for="Input.PhoneNumber" class="form-label"></label>
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                <input asp-for="Input.LastName" class="form-control" readonly/>
+                <label asp-for="Input.LastName" class="form-label"></label>
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
             </div>
+            
+             <div class="form-floating">
+                <input asp-for="Input.Email" class="form-control" readonly/>
+                <label asp-for="Input.Email" class="form-label"></label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+             <div class="form-floating">
+                <input asp-for="Input.TelephoneNumber" class="form-control" />
+                <label asp-for="Input.TelephoneNumber" class="form-label"></label>
+                <span asp-validation-for="Input.TelephoneNumber" class="text-danger"></span>
+            </div>
+             <div class="form-floating">
+                <input asp-for="Input.StreetName" class="form-control" />
+                <label asp-for="Input.StreetName" class="form-label"></label>
+                <span asp-validation-for="Input.StreetName" class="text-danger"></span>
+            </div>
+             <div class="form-floating">
+                <input asp-for="Input.BuildingNumber" class="form-control"  />
+                <label asp-for="Input.BuildingNumber" class="form-label"></label>
+                <span asp-validation-for="Input.BuildingNumber" class="text-danger"></span>
+            </div>
+             <div class="form-floating">
+                <input asp-for="Input.CityName" class="form-control" />
+                <label asp-for="Input.CityName" class="form-label"></label>
+                <span asp-validation-for="Input.CityName" class="text-danger"></span>
+            </div>
+             <div class="form-floating">
+                <input asp-for="Input.ZipCode" class="form-control" />
+                <label asp-for="Input.ZipCode" class="form-label"></label>
+                <span asp-validation-for="Input.ZipCode" class="text-danger"></span>
+            </div>
+            <div class="pt-4">
             <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+            </div>
         </form>
     </div>
 </div>
