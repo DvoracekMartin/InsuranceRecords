@@ -1,0 +1,74 @@
+﻿@model PolicyHolder
+
+<form method="post"><!--asp-action="Edit"-->
+	<div class="p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Editovat pojištěnce</h2>
+		</div>
+		<hr class="border-2 border-top border-primary">
+		@*<div asp-validation-summary="All"></div>*@
+		<div class="row pt-4">
+			<div class="col-md-6 mb-3">
+				<label asp-for="Name"></label>
+				<input asp-for="Name" class="form-control" />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+			<div class="col-md-6 mb-3">
+				<label asp-for="LastName"></label>
+				<input asp-for="LastName" class="form-control" />
+				<span asp-validation-for="LastName" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6 mb-3">
+				<label asp-for="EMail"></label>
+				<input asp-for="EMail" class="form-control" />
+				<span asp-validation-for="EMail" class="text-danger"></span>
+			</div>
+			<div class="col-md-6 mb-3">
+				<label asp-for="TelephoneNumber"></label>
+				<input asp-for="TelephoneNumber" class="form-control" />
+				<span asp-validation-for="TelephoneNumber" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6 mb-3">
+				<label asp-for="StreetName"></label>
+				<input asp-for="StreetName" class="form-control" />
+				<span asp-validation-for="StreetName" class="text-danger"></span>
+			</div>
+			<div class="col-md-6 mb-3">
+				<label asp-for="BuildingNumber"></label>
+				<input asp-for="BuildingNumber" class="form-control" />
+				<span asp-validation-for="BuildingNumber" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6 mb-3">
+				<label asp-for="CityName"></label>
+				<input asp-for="CityName" class="form-control" />
+				<span asp-validation-for="CityName" class="text-danger"></span>
+			</div>
+			<div class="col-md-6 mb-3">
+				<label asp-for="ZIPCode"></label>
+				<input asp-for="ZIPCode" class="form-control" />
+				<span asp-validation-for="ZIPCode" class="text-danger"></span>
+			</div>
+		</div>
+	</div>
+	<div class="text-center">
+		<button type="submit" class="btn btn-primary" style="width:200px"><i class="bi bi-pencil-square"></i>&nbsp;Editovat</button>
+		<a asp-controller="PolicyHolder" asp-action="Index" class="btn btn-secondary btn-outline-primary" style="width:200px">
+			Zpět na seznam
+		</a>
+	</div>
+</form>
+
+@section Scripts
+{
+	<!--Client side validation-->
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}
+

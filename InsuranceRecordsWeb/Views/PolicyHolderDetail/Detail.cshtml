@@ -1,0 +1,77 @@
+﻿@model PolicyHolder
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<div class="container-fluid p3-">
+    @*<partial name="_DetailPolicyHolder" />*@
+    <div class="row pt-4 align-items-center">
+        <div class="text-center text-sm-start">
+            <h2 class="text-primary">Detail pojištěnce</h2>
+        </div>
+    </div>
+    <hr class="border-2 border-top border-primary">
+
+    <div class="container">            
+        <div class="row pt-4 pb-4 align-items-center">
+            <div class="text-center text-sm-start">
+                <h2 class="text-primary">@Model.Name @Model.LastName</h2>
+            </div>    
+        </div>
+        <div class="row">                    
+            <div class="col-12 col-sm-6 px-5">                    
+                <div>@Model.StreetName @Model.BuildingNumber</div>
+                <div>@Model.CityName</div>
+                <div>@Model.ZIPCode</div>                       
+            </div>                                        
+            <div class="col-12 col-sm-6 px-5 pt-4 pt-sm-0">                       
+                <div>@Model.EMail</div>
+                <div>@Model.TelephoneNumber</div>                     
+            </div>                   
+        </div>
+    </div>
+    <div class="row mt-4 pt-4 pb-4 align-items-center">
+        <div class="text-center text-sm-start">
+            <h3 class="text-primary">Sjednaná pojištění</h3>
+        </div>    
+    </div>
+
+    @*@if() pokud není žádné pojištění *@
+    @*<div class="row pb-4">
+        <div class="col-6 col-sm-4 px-5 text-decoration-underline">Pojištění</div>
+        <div class="col-6 col-sm-4 text-decoration-underline">Částka</div>
+    </div>*@
+    
+
+    @*<partial name="_DetailInsurance" />*@
+
+
+    <div class="container text-center pt-5">
+        <div class="d-flex flex-column flex-lg-row justify-content-center">
+            <div class="p-2"> <a asp-controller="#" asp-action="#" asp-route-id="#" 
+                class="btn btn-success" style="width:300px"><i class="bi bi-plus-circle"></i> &nbsp;Přidat pojištění</a>
+            </div>
+            <div class="p-2"> <a asp-controller="PolicyHolder" asp-action="Edit" asp-route-id="@Model.Id" 
+                class="btn btn-primary" style="width:300px"><i class="bi bi-pencil-square"></i>&nbsp;Editovat pojištěnce</a>
+            </div>
+             <div class="p-2"> <a asp-controller="PolicyHolder" asp-action="Delete" asp-route-id="@Model.Id" 
+                class="btn btn-danger" style="width:300px"><i class="bi bi-trash"></i>&nbsp;Odstranit pojištěnce</a>
+            </div>
+             @*<div class="col-md-12">
+               @* <div class="btn-group pt-4" role="group">
+                    <a asp-controller="#" asp-action="#" asp-route-id="#" 
+                    class="btn btn-success" style="width:300px"><i class="bi bi-plus-circle"></i> &nbsp;Přidat pojištění</a>
+                    <a asp-controller="PolicyHolder" asp-action="Edit" asp-route-id="@Model.Id" 
+                    class="btn btn-primary" style="width:300px"><i class="bi bi-pencil-square"></i>&nbsp;Editovat pojištěnce</a>
+                    <a asp-controller="PolicyHolder" asp-action="Delete" asp-route-id="@Model.Id" 
+                    class="btn btn-danger" style="width:300px"><i class="bi bi-trash"></i>&nbsp;Odstranit pojištěnce</a>
+                </div>  
+            </div>*@
+        </div>
+    </div>
+    <div class="text-center pt-4">
+		<a asp-controller="PolicyHolder" asp-action="Index" class="btn btn-secondary btn-outline-primary" style="width:300px">
+			Zpět na seznam
+		</a>
+	</div>
+</div>
