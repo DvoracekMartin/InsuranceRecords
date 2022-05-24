@@ -9,6 +9,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));;
 
 
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(connectionString));;
+
+
 builder.Services.AddDbContext<InsuranceRecordsWeb.Areas.Identity.Data.ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));;
 
