@@ -71,15 +71,34 @@ namespace InsuranceRecordsWeb.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
+            [Required]
+            [StringLength(255, ErrorMessage = "Jméno příliš dlouhé")]
+            [Display(Name = "Jméno")]
+            public string Name { get; set; }
+            [Required]
+            [StringLength(255, ErrorMessage = "Příjmení příliš dlouhé")]
+            [Display(Name="Příjmení")]
+            public string LastName { get; set; }
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
-
+            [Required]
+            [Display(Name="Telefonní číslo")]
+            public string TelephoneNumber { get; set; }
+            [Required]
+            [Display(Name="Ulice")]
+            public string StreetName { get; set; }
+            [Required]
+            [Display(Name="Číslo popisné")]
+            public string BuildingNumber { get; set; }
+            [Required]
+            [Display(Name="Město")]
+            public string CityName { get; set; }
+            [Required]
+            [Display(Name="PSČ")]
+            public string ZipCode { get; set; }                      
+            
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -87,7 +106,7 @@ namespace InsuranceRecordsWeb.Areas.Identity.Pages.Account
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Heslo")]
             public string Password { get; set; }
 
             /// <summary>
@@ -95,7 +114,7 @@ namespace InsuranceRecordsWeb.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
+            [Display(Name = "Potvrďte heslo")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
         }
@@ -114,6 +133,15 @@ namespace InsuranceRecordsWeb.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+
+                user.Name = Input.Name;
+                user.LastName = Input.LastName;
+                user.Email = Input.Email;
+                user.TelephoneNumber = Input.TelephoneNumber;   
+                user.StreetName = Input.StreetName; 
+                user.BuildingNumber = Input.BuildingNumber; 
+                user.CityName = Input.CityName; 
+                user.ZipCode = Input.ZipCode;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
