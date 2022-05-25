@@ -5,7 +5,7 @@ namespace InsuranceRecordsWeb.Models
     public class RolesModel
     {
         public int Id { get; set; }
-        [Display(Name="Název role")]
+        [Display(Name="Role")]
         public string RoleName { get; set; }
     }
 }

@@ -17,8 +17,8 @@
             <form asp-action="CreateRole">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="RoleName" class="control-label"></label>
-                    <input asp-for="RoleName" class="form-control" />
+                    @*<label asp-for="RoleName" class="control-label"></label>*@
+                    <input asp-for="RoleName" class="form-control" placeholder="Název role" />
                     <span asp-validation-for="RoleName" class="text-danger"></span>
                 </div>
                 <div class="form-group pt-4">
