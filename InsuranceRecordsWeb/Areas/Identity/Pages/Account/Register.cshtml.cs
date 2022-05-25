@@ -46,23 +46,11 @@ namespace InsuranceRecordsWeb.Areas.Identity.Pages.Account
             _emailSender = emailSender;
         }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         [BindProperty]
         public InputModel Input { get; set; }
-
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
+  
         public string ReturnUrl { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
         /// <summary>
@@ -71,37 +59,48 @@ namespace InsuranceRecordsWeb.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-            [Required(ErrorMessage = "Pole je povinné")]
-            [DataType(DataType.Text)]
-            [StringLength(255, ErrorMessage = "Jméno příliš dlouhé")]
+            [Required(ErrorMessage = "Toto pole je povinné")]
+            //[RegularExpression(@"", ErrorMessage = "Neplatné jméno")]
             [Display(Name = "Jméno")]
             public string Name { get; set; }
-            [Required(ErrorMessage = "Pole je povinné")]
-            [DataType(DataType.Text)]
-            [StringLength(255, ErrorMessage = "Příjmení příliš dlouhé")]
+
+            [Required(ErrorMessage = "Toto pole je povinné")]
+            //[RegularExpression(@"", ErrorMessage = "Neplatné příjmení")]
+            //[StringLength(255, ErrorMessage = "Příjmení příliš dlouhé")]
             [Display(Name="Příjmení")]
             public string LastName { get; set; }
-            [Required(ErrorMessage = "Pole je povinné")]
-            [EmailAddress]
+
+            [Required(ErrorMessage = "Toto pole je povinné")]
+            [RegularExpression(@"^[\w-\.]+@([\w -]+\.)+[\w-]{2,4}$", ErrorMessage = "Neplatný Email")]
             [Display(Name = "Email")]
             public string Email { get; set; }
-            [Required(ErrorMessage = "Pole je povinné")]
+
+            [Required(ErrorMessage = "Toto pole je povinné")]
+            [RegularExpression(@"^[0-9]{9}$", ErrorMessage = "Zadejte devíticiferné telefonní číslo")]
             [Display(Name="Telefonní číslo")]
             public string TelephoneNumber { get; set; }
-            [Required(ErrorMessage = "Pole je povinné")]
+
+            [Required(ErrorMessage = "Toto pole je povinné")]
+            //[RegularExpression(@"^(.*[^0-9]+)$", ErrorMessage = "Neplatný název")]
             [Display(Name="Ulice")]
             public string StreetName { get; set; }
-            [Required(ErrorMessage = "Pole je povinné")]
+
+            [Required(ErrorMessage = "Toto pole je povinné")]
+            //[RegularExpression(@"^[a-zá-ž]+$", ErrorMessage = "Neplatné č.p.")]
             [Display(Name="Číslo popisné")]
             public string BuildingNumber { get; set; }
-            [Required(ErrorMessage = "Pole je povinné")]
+
+            [Required(ErrorMessage = "Toto pole je povinné")]
+            //[RegularExpression(@"^[a-zá-ž]+$", ErrorMessage = "Neplatný název")]
             [Display(Name="Město")]
             public string CityName { get; set; }
-            [Required(ErrorMessage = "Pole je povinné")]
+
+            [Required(ErrorMessage = "Toto pole je povinné")]
+            [RegularExpression(@"^[0-9]{5}$", ErrorMessage ="Zadejte pěticiferné PSČ")]
             [Display(Name="PSČ")]
             public string ZipCode { get; set; }                               
            
-            [Required(ErrorMessage = "Pole je povinné")]
+            [Required(ErrorMessage = "Toto pole je povinné")]
             [StringLength(100, ErrorMessage = "Minimální povolená délka je 6 znaků", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Heslo")]
@@ -128,13 +127,13 @@ namespace InsuranceRecordsWeb.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
-                user.Name = Input.Name.Trim();
-                user.LastName = Input.LastName.Trim();
+                user.Name = Uppercase(Input.Name.Trim());
+                user.LastName = Uppercase(Input.LastName.Trim());
                 user.Email = Input.Email.Trim();
                 user.TelephoneNumber = Input.TelephoneNumber.Trim();
-                user.StreetName = Input.StreetName.Trim();
+                user.StreetName = Uppercase(Input.StreetName.Trim());
                 user.BuildingNumber = Input.BuildingNumber.Trim(); 
-                user.CityName = Input.CityName.Trim(); 
+                user.CityName = Uppercase(Input.CityName.Trim()); 
                 user.ZipCode = Input.ZipCode.Trim();
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
@@ -199,5 +198,12 @@ namespace InsuranceRecordsWeb.Areas.Identity.Pages.Account
             }
             return (IUserEmailStore<ApplicationUser>)_userStore;
         }
+
+        //Vrací string z parametru s uppercase prvním písmenem
+        public string Uppercase(string str)
+        {
+            return char.ToUpper(str[0]) + str.Substring(1);
+        }
+
     }
 }
