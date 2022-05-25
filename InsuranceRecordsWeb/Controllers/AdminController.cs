@@ -34,7 +34,7 @@ namespace InsuranceRecordsWeb.Controllers
             {
                 var result = await _roleManager.CreateAsync(new IdentityRole(role.RoleName.Trim()));
             }
-            TempData["success"] = "Role created succesfully";
+            TempData["success"] = "Role úspěšně vytvořena";
             return View();
         }
 
@@ -64,7 +64,7 @@ namespace InsuranceRecordsWeb.Controllers
                 return NotFound();
             }
             await _roleManager.DeleteAsync(role);
-            TempData["success"] = "Role deleted succesfully";
+            TempData["success"] = "Role úspěšně odstraněna";
             return RedirectToAction("IndexRole");
 
         }
