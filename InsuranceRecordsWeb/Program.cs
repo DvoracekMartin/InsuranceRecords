@@ -16,8 +16,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDbContext<InsuranceRecordsWeb.Areas.Identity.Data.ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));;
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
-    .AddEntityFrameworkStores<InsuranceRecordsWeb.Areas.Identity.Data.ApplicationDbContext>();;
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false).AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<InsuranceRecordsWeb.Areas.Identity.Data.ApplicationDbContext>(); ;
 
 // Add services to the container.
 builder.Services.AddDbContext<InsuranceRecordsWeb.Areas.Identity.Data.ApplicationDbContext>(options => options.UseSqlServer(
@@ -38,8 +38,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication();;
 
+app.UseAuthentication();;
 app.UseAuthorization();
 
 app.MapControllerRoute(

@@ -1,0 +1,37 @@
+﻿@model List<Microsoft.AspNetCore.Identity.IdentityRole>
+
+@{
+    ViewData["Title"] = "Role-seznam";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container p3-">
+    <div class="row pt-4 align-items-center">
+        <div class="text-center col-sm-6 text-sm-start">
+            <h2 class="text-primary">Role - seznam</h2>
+        </div>
+        <div class="text-center col-sm-6 text-sm-end">
+            <a asp-controller="Admin" asp-action="CreateRole" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp;Přidat novou roli</a>
+        </div>
+    </div>
+    <hr class="border-2 border-top border-primary">
+
+    <div class="row pt-4">
+        <div class="col-6 col-sm-4 text-decoration-underline">Název</div>
+        <div class="col-6 col-sm-4 text-decoration-underline">Id</div>
+    </div>
+
+    @foreach(var obj in Model) 
+        {   
+            <div class="row pt-4 align-items-center">
+               <div class="col-6 col-sm-4">@obj.Name</div>
+               <div class="col-6 col-sm-4">@obj.Id</div> 
+               <div class="col-12 col-sm-4">
+                <div class="d-flex justify-content-center justify-content-sm-end">
+                    <a asp-controller="Admin" asp-action="DeleteRole" asp-route-id="@obj.Id" 
+                    class="btn btn-danger" style="width:175px"><i class="bi bi-trash"></i>&nbsp;Odstranit</a>                   
+                </div>
+            </div>
+            </div>
+        }
+</div>

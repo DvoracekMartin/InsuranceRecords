@@ -1,0 +1,32 @@
+﻿@model InsuranceRecordsWeb.Models.RolesModel
+
+@{
+    ViewData["Title"] = "Role - přidat";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container p3-">
+    <div class="row pt-4 align-items-center">
+        <div class="text-center col-sm-6 text-sm-start">
+            <h2 class="text-primary">Přidat novou roli</h2>
+        </div>
+    </div>
+    <hr class="border-2 border-top border-primary">
+
+    <div class="row pt-4">
+        <div class="col-md-4">
+            <form asp-action="CreateRole">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="RoleName" class="control-label"></label>
+                    <input asp-for="RoleName" class="form-control" />
+                    <span asp-validation-for="RoleName" class="text-danger"></span>
+                </div>
+                <div class="form-group pt-4">
+                    <button type="submit" class="btn btn-primary" style="width:200px"><i class="bi bi-plus-circle"></i> &nbsp;Přidat</button>
+                    <a asp-action="IndexRole" asp-controller="Admin" class="btn btn-outline-primary" style="width:200px">Seznam</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

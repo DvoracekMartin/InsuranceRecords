@@ -27,12 +27,21 @@
                     <span class="visually-hidden">(current)</span>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" asp-area="" asp-controller="PolicyHolder" asp-action="Index">Policy Holders</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" asp-area="" asp-controller="Insurance" asp-action="InsuranceList">Insurance List</a>
-                </li>
+                @if (User.IsInRole("Administrator"))
+                    {
+                    <li class="nav-item">
+                      <a class="nav-link" asp-area="" asp-controller="PolicyHolder" asp-action="Index">Policy Holders</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" asp-area="" asp-controller="Insurance" asp-action="InsuranceList">Insurance List</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="IndexRole">Roles</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="CreateRole">Create Role</a>
+                    </li>
+                    }
                 
                 @*<li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
