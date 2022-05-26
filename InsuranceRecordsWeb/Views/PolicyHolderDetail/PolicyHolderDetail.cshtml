@@ -19,12 +19,12 @@
             </div>    
         </div>
         <div class="row">                    
-            <div class="col-12 col-sm-6 px-5">                    
+            <div class="col-12 col-sm-6 col-lg-4 px-5">                    
                 <div>@Model.StreetName @Model.BuildingNumber</div>
                 <div>@Model.CityName</div>
                 <div>@Model.ZIPCode</div>                       
             </div>                                        
-            <div class="col-12 col-sm-6 px-5 pt-4 pt-sm-0">                       
+            <div class="col-12 col-sm-6 px-5 px-sm-0 pt-4 pt-sm-0">                       
                 <div>@Model.EMail</div>
                 <div>@Model.TelephoneNumber</div>                     
             </div>                   
@@ -41,22 +41,50 @@
         <div class="col-6 col-sm-4 px-5 text-decoration-underline">Pojištění</div>
         <div class="col-6 col-sm-4 text-decoration-underline">Částka</div>
     </div>*@
-    
 
-    @*<partial name="_DetailInsurance" />*@
+    <div class="container pb-4">
+        <div class="row">          
+            <div class="col-6 col-sm-6 col-lg-4 px-5 text-decoration-underline">Pojištění</div>
+            <div class="col-6 col-sm-6 px-5 px-sm-0 text-decoration-underline">Částka</div>
+        </div>
+        @foreach(var obj in Model.Insurances) 
+            {   //Vypsání pojištění
+                <div class="row pt-4 align-items-center">
+                    <div class="col-3 col-sm-3 col-lg-2 px-5 ">@obj.InsuranceSubject</div>          
+                    <div class="col-3 col-sm-3 col-lg-2 text-center">    
+                        <a asp-controller="InsuranceDetail" asp-action="InsuranceDetail" asp-route-id="@obj.Id" 
+                        class="btn btn-light"><i class="bi bi-card-text"></i>&nbsp;Detail</a>
+                    </div>       
+                    <div class="col-6 col-sm-3 col-lg-4 px-5 px-sm-0">@obj.InsuranceAmount</div> 
 
-
-    <div class="container text-center pt-5">
+                    <div class="col-12 col-md-3 col-lg-4">
+                        <div class="container text-center">
+                            <div class="d-flex flex-row flex-md-column flex-lg-row justify-content-center justify-content-md-end">
+                                <div class="p-1"> <a asp-controller="Insurance" asp-action="Edit" asp-route-id="@obj.Id" 
+                                    class="btn btn-primary" style="width:160px" ><i class="bi bi-pencil-square"></i>&nbsp;Editovat</a>
+                                </div>
+                                <div class="p-1"><a asp-controller="Insurance" asp-action="Delete" asp-route-id="@obj.Id" 
+                                    class="btn btn-danger" style="width:160px"><i class="bi bi-trash"></i>&nbsp;Odstranit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                   
+                </div>
+            }
+    </div>
+    <hr class="border-2 border-top border-primary">
+    <div class="container text-center">
         <div class="d-flex flex-column flex-lg-row justify-content-center">
-            <div class="p-2"> <a asp-controller="#" asp-action="#" asp-route-id="#" 
+            <div class="p-1"> <a asp-controller="Insurance" asp-action="Create" asp-route-id="" 
                 class="btn btn-success" style="width:300px"><i class="bi bi-plus-circle"></i> &nbsp;Přidat pojištění</a>
             </div>
-            <div class="p-2"> <a asp-controller="PolicyHolder" asp-action="Edit" asp-route-id="@Model.PolicyHolderId" 
+            <div class="p-1"> <a asp-controller="PolicyHolder" asp-action="Edit" asp-route-id="@Model.PolicyHolderId" 
                 class="btn btn-primary" style="width:300px"><i class="bi bi-pencil-square"></i>&nbsp;Editovat pojištěnce</a>
             </div>
-             <div class="p-2"> <a asp-controller="PolicyHolder" asp-action="Delete" asp-route-id="@Model.PolicyHolderId" 
+             <div class="p-1"> <a asp-controller="PolicyHolder" asp-action="Delete" asp-route-id="@Model.PolicyHolderId" 
                 class="btn btn-danger" style="width:300px"><i class="bi bi-trash"></i>&nbsp;Odstranit pojištěnce</a>
-            </div>
+            </div>                 
              @*<div class="col-md-12">
                @* <div class="btn-group pt-4" role="group">
                     <a asp-controller="#" asp-action="#" asp-route-id="#" 

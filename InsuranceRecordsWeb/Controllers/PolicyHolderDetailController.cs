@@ -34,7 +34,7 @@ namespace InsuranceRecordsWeb.Controllers
             {
                 return NotFound();
             }
-            var insuredFromDb = await _db.Insured.FindAsync(id);
+            var insuredFromDb = await _db.Insured.FindAsync(id);      
             var policyHolderInsuranceModel = new PolicyHolderInsuranceModel();
 
             var thisModel = new PolicyHolderInsuranceModel();
@@ -47,17 +47,23 @@ namespace InsuranceRecordsWeb.Controllers
             thisModel.BuildingNumber = insuredFromDb.BuildingNumber;
             thisModel.CityName = insuredFromDb.CityName;
             thisModel.ZIPCode = insuredFromDb.ZIPCode;
-            //thisModel.Insurances = (IEnumerable<Insurance>)await GetInsurances(insuredFromDb);
+            thisModel.Insurances = await GetInsurances(id);
             policyHolderInsuranceModel = thisModel;
 
             return View(policyHolderInsuranceModel);
 
         }
 
-        /*private async Task<List<Insurance>> GetInsurances(PolicyHolder user)
+        private async Task<List<Insurance>> GetInsurances(int? id)
         {
-            return new List<Insurance>(await _userManager.GetRolesAsync(user));
-        }*/
+            //var insurancesFromDb = _db.Insurance.Find();
+            //return insurancesFromDb;
+            var insuranecOfHolder = from i in _db.Insurance
+                                    where i.InsuranceHolderId == id
+                                    select i;
+            return insuranecOfHolder.ToList();
+            //return new List<Insurance>(_db.Insurance.ToList());
+        }
 
 
 

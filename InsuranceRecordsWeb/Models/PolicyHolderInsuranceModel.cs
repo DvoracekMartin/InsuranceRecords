@@ -29,6 +29,6 @@ namespace InsuranceRecordsWeb.Models
         [DisplayName("PSČ")]
         public string ZIPCode { get; set; }
 
-        public IEnumerable<Insurance> Insurances { get; set; }
+        public List<Insurance> Insurances { get; set; }
     }
 }
