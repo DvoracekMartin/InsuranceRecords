@@ -10,10 +10,12 @@ namespace InsuranceRecordsWeb.Controllers
     [Authorize(Roles ="Administrator")]
     public class AdminController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AdminController(RoleManager<IdentityRole> roleManager)
+        public AdminController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
         {
+            _userManager = userManager;
             _roleManager = roleManager;           
         }
 
@@ -22,6 +24,29 @@ namespace InsuranceRecordsWeb.Controllers
             var roles = await _roleManager.Roles.ToListAsync();
             return View(roles);
         }
+
+        public async Task<IActionResult> IndexUserRole()
+        {
+            var users = await _userManager.Users.ToListAsync();
+            var userRolesViewModel = new List<UserRolesViewModel>();
+            foreach (ApplicationUser user in users)
+            {
+                var thisViewModel = new UserRolesViewModel();
+                thisViewModel.UserId = user.Id;
+                thisViewModel.Name = user.Name; 
+                thisViewModel.LastName = user.LastName; 
+                thisViewModel.Email = user.Email;
+                thisViewModel.TelephoneNumber = user.TelephoneNumber;
+                thisViewModel.Roles = await GetUserRoles(user);
+                userRolesViewModel.Add(thisViewModel);
+            }
+            return View(userRolesViewModel);
+        }
+        private async Task<List<string>> GetUserRoles(ApplicationUser user)
+        {
+            return new List<string>(await _userManager.GetRolesAsync(user));
+        }
+
         public IActionResult CreateRole()
         { 
             return View();
@@ -68,5 +93,7 @@ namespace InsuranceRecordsWeb.Controllers
             return RedirectToAction("IndexRole");
 
         }
+
+
     }
 }

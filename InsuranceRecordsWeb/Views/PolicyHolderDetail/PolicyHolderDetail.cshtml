@@ -1,4 +1,4 @@
-﻿@model PolicyHolder
+﻿@model PolicyHolderInsuranceModel
 @{
     ViewData["Title"] = "Detail";
 }
@@ -51,10 +51,10 @@
             <div class="p-2"> <a asp-controller="#" asp-action="#" asp-route-id="#" 
                 class="btn btn-success" style="width:300px"><i class="bi bi-plus-circle"></i> &nbsp;Přidat pojištění</a>
             </div>
-            <div class="p-2"> <a asp-controller="PolicyHolder" asp-action="Edit" asp-route-id="@Model.Id" 
+            <div class="p-2"> <a asp-controller="PolicyHolder" asp-action="Edit" asp-route-id="@Model.PolicyHolderId" 
                 class="btn btn-primary" style="width:300px"><i class="bi bi-pencil-square"></i>&nbsp;Editovat pojištěnce</a>
             </div>
-             <div class="p-2"> <a asp-controller="PolicyHolder" asp-action="Delete" asp-route-id="@Model.Id" 
+             <div class="p-2"> <a asp-controller="PolicyHolder" asp-action="Delete" asp-route-id="@Model.PolicyHolderId" 
                 class="btn btn-danger" style="width:300px"><i class="bi bi-trash"></i>&nbsp;Odstranit pojištěnce</a>
             </div>
              @*<div class="col-md-12">

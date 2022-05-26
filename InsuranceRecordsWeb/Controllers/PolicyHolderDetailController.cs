@@ -20,43 +20,50 @@ namespace InsuranceRecordsWeb.Controllers
             var insuredFromDb = await _db.Insured.FindAsync(id);
            
 
-           /* var insuredFromDb = from insured in _db.Insured
-                                   join insurance in _db.Insurance on insured.Id equals insurance.InsuranceHolderId
-                                   select insured;
-            var insuranceFromDb = from insured in _db.Insured
-                                join insurance in _db.Insurance on insured.Id equals insurance.InsuranceHolderId
-                                select insurance;*/
-
             if (insuredFromDb == null)
             {
                 return NotFound(insuredFromDb);
             }
-            //return View(insuredFromDb);
-            //dynamic myDynamicmodel = new System.Dynamic.ExpandoObject();
-            //ViewBag.PolicyHolders = insuredFromDb;
-           // ViewBag.Insurances = insuranceFromDb;
+            
             return View(insuredFromDb);
         }
-        
-        /*public List<PolicyHolder> GetPolicyHolders()
+
+        public async Task<IActionResult> PolicyHolderDetail(int? id)
         {
-            List<PolicyHolder> InsuredList = _db.Insured.ToList();
-            return InsuredList;
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var insuredFromDb = await _db.Insured.FindAsync(id);
+            var policyHolderInsuranceModel = new PolicyHolderInsuranceModel();
+
+            var thisModel = new PolicyHolderInsuranceModel();
+            thisModel.PolicyHolderId = insuredFromDb.Id;    
+            thisModel.Name = insuredFromDb.Name;
+            thisModel.LastName = insuredFromDb.LastName;
+            thisModel.EMail = insuredFromDb.EMail;
+            thisModel.TelephoneNumber = insuredFromDb.TelephoneNumber;  
+            thisModel.StreetName = insuredFromDb.StreetName;
+            thisModel.BuildingNumber = insuredFromDb.BuildingNumber;
+            thisModel.CityName = insuredFromDb.CityName;
+            thisModel.ZIPCode = insuredFromDb.ZIPCode;
+            //thisModel.Insurances = (IEnumerable<Insurance>)await GetInsurances(insuredFromDb);
+            policyHolderInsuranceModel = thisModel;
+
+            return View(policyHolderInsuranceModel);
+
         }
-        public List<Insurance> GetInsurances()
-        {
-            List<Insurance> InsuranceList = _db.Insurance.ToList();
-            return InsuranceList;
 
+        /*private async Task<List<Insurance>> GetInsurances(PolicyHolder user)
+        {
+            return new List<Insurance>(await _userManager.GetRolesAsync(user));
         }*/
 
-        /*public ActionResult DynamicDemo()
-        {
-            dynamic myDynamicmodel = new System.Dynamic.ExpandoObject();
-            myDynamicmodel.PolicyHolders = GetPolicyHolders();
-            myDynamicmodel.Insurances = GetInsurances();
-            return View(myDynamicmodel);
-        }*/
+
+
+
+
+
 
     }
 }

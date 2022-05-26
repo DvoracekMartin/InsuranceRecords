@@ -1,0 +1,43 @@
+﻿@model List<UserRolesViewModel>
+
+@{
+    ViewData["Title"] = "Uživatelé-seznam";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container p3-">
+    <div class="row pt-4 align-items-center">
+        <div class="text-center col-sm-6 text-sm-start">
+            <h2 class="text-primary">Uživatelé - seznam</h2>
+        </div>
+        @*<div class="text-center col-sm-6 text-sm-end">
+            <a asp-controller="#" asp-action="#" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp;Přidat novou roli</a>
+        </div>*@
+    </div>
+    <hr class="border-2 border-top border-primary">
+
+    <div class="row pt-4">
+        <div class="col-6 col-sm-4 col-lg-2 text-decoration-underline">Jméno</div>
+        <div class="col-6 col-sm-4 col-lg-2 text-decoration-underline">Příjmení</div>
+        <div class="col-6 col-sm-4 col-lg-2 text-decoration-underline">Email</div>
+        <div class="col-6 col-sm-4 col-lg-2 text-decoration-underline">Tel. číslo</div>
+        <div class="col-6 col-sm-4 col-lg-2 text-decoration-underline">Role</div>
+    </div>
+
+    @foreach(var user in Model) 
+        {   
+            <div class="row pt-4 align-items-center">
+                <div class="col-6 col-sm-4 col-lg-2">@user.Name</div>
+                <div class="col-6 col-sm-4 col-lg-2">@user.LastName</div> 
+                <div class="col-6 col-sm-4 col-lg-2">@user.Email</div>
+                <div class="col-6 col-sm-4 col-lg-2">@user.TelephoneNumber</div>
+                <div class="col-6 col-sm-4 col-lg-2">@string.Join(" , ", user.Roles.ToList())</div>
+                <div class="col-12 col-sm-4 col-lg-2">
+                <div class="pt-2 pt-sm-0 d-flex justify-content-center justify-content-sm-start justify-content-lg-end">
+                    <a class="btn btn-primary" asp-controller="#" asp-action="#" 
+                    asp-route-userId="@user.UserId">Detaily</a>                  
+                </div>
+            </div>
+            </div>
+        }
+</div>
