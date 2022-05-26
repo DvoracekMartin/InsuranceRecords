@@ -60,38 +60,42 @@ namespace InsuranceRecordsWeb.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required(ErrorMessage = "Toto pole je povinné")]
-            //[RegularExpression(@"", ErrorMessage = "Neplatné jméno")]
+            [RegularExpression(@"^[^\d]+$", ErrorMessage = "Neplatné jméno")]
             [Display(Name = "Jméno")]
             public string Name { get; set; }
 
             [Required(ErrorMessage = "Toto pole je povinné")]
-            //[RegularExpression(@"", ErrorMessage = "Neplatné příjmení")]
-            //[StringLength(255, ErrorMessage = "Příjmení příliš dlouhé")]
+            [RegularExpression(@"^[^\d]+$", ErrorMessage = "Neplatné příjmení")]
             [Display(Name="Příjmení")]
             public string LastName { get; set; }
 
+            /// <summary>
+            /// Email validation option is turned off in program.cs, RegEx is sufficient enough for my needs here
+            /// </summary>
             [Required(ErrorMessage = "Toto pole je povinné")]
             [RegularExpression(@"^[\w-\.]+@([\w -]+\.)+[\w-]{2,4}$", ErrorMessage = "Neplatný Email")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
             [Required(ErrorMessage = "Toto pole je povinné")]
+            //[RegularExpression(@"^\+(\d){3}[0-9]{9}$", ErrorMessage = "Zadejte devíticiferné telefonní číslo s předvolbou")]
             [RegularExpression(@"^[0-9]{9}$", ErrorMessage = "Zadejte devíticiferné telefonní číslo")]
             [Display(Name="Telefonní číslo")]
             public string TelephoneNumber { get; set; }
 
             [Required(ErrorMessage = "Toto pole je povinné")]
-            //[RegularExpression(@"^(.*[^0-9]+)$", ErrorMessage = "Neplatný název")]
+            //[RegularExpression(@"^\D+(\s\d+)?$", ErrorMessage = "Neplatný název")]
             [Display(Name="Ulice")]
             public string StreetName { get; set; }
 
             [Required(ErrorMessage = "Toto pole je povinné")]
-            //[RegularExpression(@"^[a-zá-ž]+$", ErrorMessage = "Neplatné č.p.")]
+            [RegularExpression(@"^\d*\/?\d+$", ErrorMessage = "Neplatné č.p.")]
             [Display(Name="Číslo popisné")]
             public string BuildingNumber { get; set; }
 
             [Required(ErrorMessage = "Toto pole je povinné")]
-            //[RegularExpression(@"^[a-zá-ž]+$", ErrorMessage = "Neplatný název")]
+            //[RegularExpression(@"^[\\p{L}]+(?:[\s?][\\p{L}]+)*$", ErrorMessage = "Neplatný název")]
+            [RegularExpression(@"^\D+(\s\d+)?$", ErrorMessage = "Neplatný název")]        
             [Display(Name="Město")]
             public string CityName { get; set; }
 
@@ -101,7 +105,7 @@ namespace InsuranceRecordsWeb.Areas.Identity.Pages.Account
             public string ZipCode { get; set; }                               
            
             [Required(ErrorMessage = "Toto pole je povinné")]
-            [StringLength(100, ErrorMessage = "Minimální povolená délka je 6 znaků", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "Heslo musí obsahovat velké písmeno a speciální znak. \nMinimální povolená délka je 6 znaků", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Heslo")]
             public string Password { get; set; }
@@ -127,8 +131,8 @@ namespace InsuranceRecordsWeb.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
-                user.Name = Uppercase(Input.Name.Trim());
-                user.LastName = Uppercase(Input.LastName.Trim());
+                user.Name = Uppercase(Input.Name.Trim().ToLower());
+                user.LastName = Uppercase(Input.LastName.Trim().ToLower());
                 user.Email = Input.Email.Trim();
                 user.TelephoneNumber = Input.TelephoneNumber.Trim();
                 user.StreetName = Uppercase(Input.StreetName.Trim());
@@ -199,7 +203,7 @@ namespace InsuranceRecordsWeb.Areas.Identity.Pages.Account
             return (IUserEmailStore<ApplicationUser>)_userStore;
         }
 
-        //Vrací string z parametru s uppercase prvním písmenem
+        //Returns string from the parameter with the uppercased first letter 
         public string Uppercase(string str)
         {
             return char.ToUpper(str[0]) + str.Substring(1);

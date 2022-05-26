@@ -69,19 +69,23 @@ namespace InsuranceRecordsWeb.Areas.Identity.Pages.Account.Manage
            
             [Display(Name = "Email/Uživatelské jméno")]
             public string Email { get; set; }
-           
+
+            [RegularExpression(@"^[0-9]{9}$", ErrorMessage = "Zadejte devíticiferné telefonní číslo")]
             [Display(Name = "Telefonní číslo")]
             public string TelephoneNumber { get; set; }
           
             [Display(Name = "Ulice")]
             public string StreetName { get; set; }
-            
+
+            [RegularExpression(@"^\d*\/?\d+$", ErrorMessage = "Neplatné č.p.")]
             [Display(Name = "Číslo popisné")]
             public string BuildingNumber { get; set; }
-           
+
+            [RegularExpression(@"^\D+(\s\d+)?$", ErrorMessage = "Neplatný název")]
             [Display(Name = "Město")]
             public string CityName { get; set; }
-            
+
+            [RegularExpression(@"^[0-9]{5}$", ErrorMessage = "Zadejte pěticiferné PSČ")]
             [Display(Name = "PSČ")]
             public string ZipCode { get; set; }
         }
