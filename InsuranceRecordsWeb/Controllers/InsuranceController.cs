@@ -27,6 +27,9 @@ namespace InsuranceRecordsWeb.Controllers
             }
             var insuredFromDb = _db.Insured.Find(id);
             var insurance = new Insurance();
+            var dateTime = DateTime.Now.Date;
+            insurance.InsuranceValidFrom = dateTime;
+            insurance.InsuranceValidUntil = dateTime;
             insurance.InsuranceHolderId = insuredFromDb.Id;                       
 
             return View(insurance);

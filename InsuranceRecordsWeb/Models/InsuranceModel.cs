@@ -19,9 +19,11 @@ namespace InsuranceRecordsWeb.Models
         [DisplayName("Předmět pojištění")]
         public string InsuranceSubject { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         [DisplayName("Platnost od")]
         public DateTime InsuranceValidFrom { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         [DisplayName("Platnost do")]
         public DateTime InsuranceValidUntil { get; set; }
 
