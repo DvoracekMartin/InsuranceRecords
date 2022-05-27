@@ -8,7 +8,7 @@ namespace InsuranceRecordsWeb.Models
         [Key]
         public int Id { get; set; }
 
-        public string? UserId { get; set; }
+        public string UserId { get; set; }
 
         [Required(ErrorMessage = "Pole je povinné")]
         [DisplayName("Jméno")]
