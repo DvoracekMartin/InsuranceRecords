@@ -19,35 +19,31 @@ namespace InsuranceRecordsWeb.Controllers
             return View(objInsuranceList);
         }
         //GET
-        public IActionResult Create(int? id)
+        public IActionResult Create(int? userId)
         {
-            if (id == null || id == 0)
+            if (userId == null || userId == 0)
             {
                 return NotFound();
-            }
-            var insuredFromDb = _db.Insured.Find(id);
-            var insurance = new Insurance();
+            }          
             var dateTime = DateTime.Now.Date;
+            var insurance = new Insurance();
+            int holderId = (int)userId;
             insurance.InsuranceValidFrom = dateTime;
-            insurance.InsuranceValidUntil = dateTime;
-            insurance.InsuranceHolderId = insuredFromDb.Id;                       
-
+            insurance.InsuranceValidUntil = dateTime;                       
+            insurance.InsuranceHolderId = holderId;
             return View(insurance);
-            //return View();
         }
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Insurance obj)
-        {
-            
+        {       
             if (ModelState.IsValid)
-            {
-                
+            {              
                 _db.Insurance.Add(obj);
                 _db.SaveChanges();
                 TempData["success"] = "Category created succesfully";
-                return RedirectToAction("InsuranceList");
+                return RedirectToAction("PolicyHolderDetail", "PolicyHolderDetail", new { id = obj.InsuranceHolderId });
             }
             return View(obj);
         }
@@ -72,18 +68,13 @@ namespace InsuranceRecordsWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Insurance obj)
         {
-            /*if (obj.Name == obj.DisplayOrder.ToString())
-            {
-                ModelState.AddModelError("CustomError", "The DisplayOrder cannot exactly match the name.");
-            }*/
-
-
+         
             if (ModelState.IsValid)
             {
                 _db.Insurance.Update(obj);
                 _db.SaveChanges();
                 TempData["success"] = " updated succesfully";
-                return RedirectToAction("InsuranceList");
+                return RedirectToAction("PolicyHolderDetail", "PolicyHolderDetail", new { id = obj.InsuranceHolderId });
             }
             return View(obj);
         }
@@ -116,7 +107,7 @@ namespace InsuranceRecordsWeb.Controllers
             _db.Insurance.Remove(obj);
             _db.SaveChanges();
             TempData["success"] = "Category deleted succesfully";
-            return RedirectToAction("InsuranceList");
+            return RedirectToAction("PolicyHolderDetail", "PolicyHolderDetail", new { id = obj.InsuranceHolderId });
 
         }
 

@@ -13,7 +13,7 @@ namespace InsuranceRecordsWeb.Models
         [DisplayName("Pojištění")]
         public string InsuranceType { get; set; }
         [Required]
-        [DisplayName("Částka")]
+        [DisplayName("Částka v Kč")]
         public string InsuranceAmount { get; set; }
         [Required]
         [DisplayName("Předmět pojištění")]

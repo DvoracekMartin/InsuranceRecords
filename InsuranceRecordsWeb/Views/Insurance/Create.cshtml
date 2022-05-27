@@ -8,53 +8,55 @@
 <form method="post">
 	<div class="p-3 mt-4">
 		<div class="row pb-2">
-			<h2 class="text-primary">Nové pojištění @Model.InsuranceHolderId @Model.InsuranceValidFrom</h2>
+			<h2 class="text-primary">Nové pojištění</h2>
 		</div>
 		<hr class="border-2 border-top border-primary">
 		@*<div asp-validation-summary="All"></div>*@
 		<div class="row pt-4">
 			<div class="col-md-6 mb-3">
 				<label asp-for="InsuranceType"></label>
-				<input asp-for="InsuranceType" class="form-control" placeholder=@Model.InsuranceType/>
+				@*<input asp-for="InsuranceType" class="form-control"/>*@			
+				<select asp-for="InsuranceType" class="form-control">
+					<option value="">Vyberte</option>
+					<option value="Osoby">Osoby</option>
+					<option value="Majetku">Majetku</option>
+					<option value="Zájmu">Zájmu</option>				
+				</select>
 				<span asp-validation-for="InsuranceType" class="text-danger"></span>
-			</div>
-			<div class="col-md-6 mb-3">
-				<label asp-for="InsuranceSubject"></label>
-				<input asp-for="InsuranceSubject" class="form-control" placeholder=@Model.InsuranceSubject/>
-				<span asp-validation-for="InsuranceSubject" class="text-danger"></span>
-			</div>
+			</div>		
 		</div>
 		<div class="row">
 			<div class="col-md-6 mb-3">
+				<label asp-for="InsuranceSubject"></label>
+				<input asp-for="InsuranceSubject" class="form-control" />
+				<span asp-validation-for="InsuranceSubject" class="text-danger"></span>
+			</div>			
+			<div class="col-md-6 mb-3">
 				<label asp-for="InsuranceAmount"></label>
-				<input asp-for="InsuranceAmount" class="form-control" placeholder=@Model.InsuranceAmount/>
+				<input asp-for="InsuranceAmount" class="form-control" />
 				<span asp-validation-for="InsuranceAmount" class="text-danger"></span>
-			</div>
+			</div>			
+		</div>
+		<div class="row">
 			<div class="col-md-6 mb-3">
 				<label asp-for="InsuranceValidFrom"></label>
 				<input asp-for="InsuranceValidFrom" class="form-control"/>
 				<span asp-validation-for="InsuranceValidFrom" class="text-danger"></span>
 			</div>
-		</div>
-		<div class="row">
 			<div class="col-md-6 mb-3">
 				<label asp-for="InsuranceValidUntil"></label>
 				<input asp-for="InsuranceValidUntil" class="form-control"/>
 				<span asp-validation-for="InsuranceValidUntil" class="text-danger"></span>
-			</div>
+			</div>		
+		</div>
+		<div class="row" hidden>
 			<div class="col-md-6 mb-3">
-				<label asp-for="InsuranceHolderId"></label>
-				<input asp-for="InsuranceHolderId" class="form-control" placeholder=@Model.InsuranceHolderId/>
-				<span asp-validation-for="InsuranceHolderId" class="text-danger"></span>
+					<label asp-for="InsuranceHolderId"></label>
+					<input asp-for="InsuranceHolderId" class="form-control" readonly placeholder=@Model.InsuranceHolderId/>
+					<span asp-validation-for="InsuranceHolderId" class="text-danger"></span>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-6 mb-3">
-				<label asp-for="Id"></label>
-				<input asp-for="InsuranceHolderId" class="form-control" readonly placeholder=@Model.Id/>
-				<span asp-validation-for="Id" class="text-danger"></span>
-			</div>
-		</div>
+
 	</div>
 	<div class="text-center">
 		<button type="submit" class="btn btn-primary" style="width:200px"><i class="bi bi-plus-circle"></i> &nbsp;Přidat</button>
@@ -70,4 +72,6 @@
 	@{
 		<partial name="_ValidationScriptsPartial" />
 	}
+	
+    </script>
 }

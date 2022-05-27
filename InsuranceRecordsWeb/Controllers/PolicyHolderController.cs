@@ -74,7 +74,7 @@ namespace InsuranceRecordsWeb.Controllers
                 _db.Insured.Update(obj);
                 _db.SaveChanges();
                 TempData["success"] = " updated succesfully";                              
-                return RedirectToAction("Index");
+                return RedirectToAction("PolicyHolderDetail", "PolicyHolderDetail", new { id = obj.Id });
             }
             return View(obj);
         }
