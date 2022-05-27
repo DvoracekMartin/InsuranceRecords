@@ -33,7 +33,7 @@ namespace InsuranceRecordsWeb.Models
         public string ZIPCode { get; set; }
 
 
-        //public List<Insurance>? Insurances { get; set; }    
+          
 
     }
 }

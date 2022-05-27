@@ -76,7 +76,7 @@
     <hr class="border-2 border-top border-primary">
     <div class="container text-center">
         <div class="d-flex flex-column flex-lg-row justify-content-center">
-            <div class="p-1"> <a asp-controller="Insurance" asp-action="Create" asp-route-id="" 
+            <div class="p-1"> <a asp-controller="Insurance" asp-action="Create"  asp-route-id="@Model.PolicyHolderId"
                 class="btn btn-success" style="width:300px"><i class="bi bi-plus-circle"></i> &nbsp;Přidat pojištění</a>
             </div>
             <div class="p-1"> <a asp-controller="PolicyHolder" asp-action="Edit" asp-route-id="@Model.PolicyHolderId" 

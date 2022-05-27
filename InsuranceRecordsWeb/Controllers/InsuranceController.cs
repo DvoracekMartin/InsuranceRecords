@@ -19,23 +19,28 @@ namespace InsuranceRecordsWeb.Controllers
             return View(objInsuranceList);
         }
         //GET
-        public IActionResult Create()
+        public IActionResult Create(int? id)
         {
-            return View();
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var insuredFromDb = _db.Insured.Find(id);
+            var insurance = new Insurance();
+            insurance.InsuranceHolderId = insuredFromDb.Id;                       
+
+            return View(insurance);
+            //return View();
         }
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Insurance obj)
         {
-            /*if (obj.Name == obj.DisplayOrder.ToString())
-            {
-                ModelState.AddModelError("CustomError", "The DisplayOrder cannot exactly match the name.");
-            }*/
             
             if (ModelState.IsValid)
             {
-                //obj.InsuranceHolderId = userId;
+                
                 _db.Insurance.Add(obj);
                 _db.SaveChanges();
                 TempData["success"] = "Category created succesfully";
