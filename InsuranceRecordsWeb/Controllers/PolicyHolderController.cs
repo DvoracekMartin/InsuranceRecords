@@ -20,9 +20,22 @@ namespace InsuranceRecordsWeb.Controllers
             return View(objInsuredList);
         }
         //GET
-        public IActionResult Create()
+       /* public IActionResult Create()
         {     
             return View();
+        }*/
+        public IActionResult Create(string? userId)
+        {
+            if (userId == "")
+            {
+                return NotFound();
+            }
+           
+            var policyHolder = new PolicyHolder();
+            string userHolderId = (string)userId;
+            
+            policyHolder.UserId = userHolderId;
+            return View(policyHolder);
         }
         //POST
         [HttpPost]
@@ -38,7 +51,7 @@ namespace InsuranceRecordsWeb.Controllers
                 _db.Insured.Add(obj);
                 _db.SaveChanges();
                 TempData["success"] = "Category created succesfully";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "User", new { id = obj.UserId });
             }
             return View(obj);           
         }
@@ -107,7 +120,7 @@ namespace InsuranceRecordsWeb.Controllers
             _db.Insured.Remove(obj);
             _db.SaveChanges();
             TempData["success"] = "Category deleted succesfully";
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "User", new { id = obj.UserId });
             
         }
 

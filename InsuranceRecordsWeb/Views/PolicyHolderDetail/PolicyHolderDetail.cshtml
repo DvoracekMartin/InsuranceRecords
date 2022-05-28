@@ -1,4 +1,7 @@
-﻿@model PolicyHolderInsuranceModel
+﻿@using InsuranceRecordsWeb.Areas.Identity.Data
+@using Microsoft.AspNetCore.Identity
+@model PolicyHolderInsuranceModel
+@inject UserManager<ApplicationUser> UserManager
 @{
     ViewData["Title"] = "Detail";
 }
@@ -105,7 +108,7 @@
         </div>
     </div>
     <div class="text-center pt-4">
-		<a asp-controller="PolicyHolder" asp-action="Index" class="btn btn-secondary btn-outline-primary" style="width:300px">
+		<a asp-controller="User" asp-action="Index" asp-route-id="@UserManager.GetUserId(User)" class="btn btn-secondary btn-outline-primary" style="width:300px">
 			Zpět na seznam
 		</a>
 	</div>

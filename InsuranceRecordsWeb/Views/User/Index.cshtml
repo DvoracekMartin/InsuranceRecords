@@ -1,5 +1,4 @@
-﻿@using InsuranceRecordsWeb.Areas.Identity.Data
-@model List<ApplicationUser>
+﻿@model UserViewModel
 
 	@{
     ViewData["Title"] = "Moji pojištěnci";
@@ -7,36 +6,39 @@
 }
 <div class="container p3-">
     <div class="row pt-4 align-items-center">
-        <div class="text-center col-sm-6 text-sm-start">
-            <h2 class="text-primary">@ViewData["Title"]</h2>
+        <div class="text-center col-12 col-md-6 text-md-start">
+            <h2 class="text-primary">Moji Pojištěnci</h2>
         </div>
-        @*<div class="text-center col-sm-6 text-sm-end">
-            <a asp-controller="#" asp-action="#" class="btn btn-primary">
-                <i class="bi bi-plus-circle"></i> &nbsp;Přidat novou roli</a>
-        </div>*@
+        <div class="text-center col-12 col-md-6 text-md-end">
+             <div class="p-1"><a asp-controller="PolicyHolder" asp-action="Create" asp-route-userId=@Model.UserId class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp;Přidat nového pojištěnce</a>
+            </div>
+        </div>
     </div>
     <hr class="border-2 border-top border-primary">
-
+    
     <div class="row pt-4">
-        <div class="col-6 col-sm-4 col-lg-2 text-decoration-underline">Jméno</div>
-        <div class="col-6 col-sm-4 col-lg-2 text-decoration-underline">Příjmení</div>
-        <div class="col-6 col-sm-4 col-lg-2 text-decoration-underline">Email</div>
-        <div class="col-6 col-sm-4 col-lg-2 text-decoration-underline">Tel. číslo</div>
+        <div class="col-6 col-lg-4 text-decoration-underline">Pojištěnec</div>
+        <div class="col-6 text-decoration-underline">Adresa</div>
     </div>
 
-    @foreach(var user in Model) 
-        {   
-            <div class="row pt-4 align-items-center">
-                <div class="col-6 col-sm-4 col-lg-2">@user.Name</div>
-                <div class="col-6 col-sm-4 col-lg-2">@user.LastName</div> 
-                <div class="col-6 col-sm-4 col-lg-2">@user.Email</div>
-                <div class="col-6 col-sm-4 col-lg-2">@user.TelephoneNumber</div>
-                <div class="col-12 col-sm-4 col-lg-2">
-                <div class="pt-2 pt-sm-0 d-flex justify-content-center justify-content-sm-start justify-content-lg-end">
-                    <a class="btn btn-primary" asp-controller="#" asp-action="#" 
-                    asp-route-userId="#">Detaily</a>                  
+    @foreach(var obj in Model.PolicyHolders) 
+    {   //Vypsání pojištěnců
+        <div class="row pt-4 align-items-center">
+            <div class="col-3 col-lg-2">@obj.Name @obj.LastName</div>          
+            <div class="col-3 col-lg-2 text-center">    
+                <a asp-controller="PolicyHolderDetail" asp-action="PolicyHolderDetail" asp-route-id="@obj.Id" 
+                class="btn btn-light"><i class="bi bi-card-text"></i>&nbsp;Detail</a>
+            </div>       
+            <div class="col-6 col-lg-4">@obj.StreetName @obj.BuildingNumber, @obj.CityName, @obj.ZIPCode</div>           
+            <div class="col-12 col-lg-4 d-flex flex-row justify-content-center justify-content-lg-end">                                
+                <div class="p-1"> <a asp-controller="PolicyHolder" asp-action="Edit" asp-route-id="@obj.Id" 
+                    class="btn btn-primary" style="width:160px" ><i class="bi bi-pencil-square"></i>&nbsp;Editovat</a>
                 </div>
-            </div>
-            </div>
-        }
+                <div class="p-1"><a asp-controller="PolicyHolder" asp-action="Delete" asp-route-id="@obj.Id" 
+                    class="btn btn-danger" style="width:160px"><i class="bi bi-trash"></i>&nbsp;Odstranit</a>
+                </div>                                  
+            </div>           
+        </div>
+    }   
 </div>
