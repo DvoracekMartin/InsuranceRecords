@@ -1,11 +1,13 @@
 ﻿using InsuranceRecordsWeb.Areas.Identity.Data;
 using InsuranceRecordsWeb.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace InsuranceRecordsWeb.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -30,6 +32,7 @@ namespace InsuranceRecordsWeb.Controllers
             {
                 return NotFound();
             }
+
             var user = await _userManager.FindByIdAsync(id);
             var userViewModel = new UserViewModel();
 

@@ -1,24 +1,23 @@
 ﻿using InsuranceRecordsWeb.Areas.Identity.Data;
 using InsuranceRecordsWeb.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InsuranceRecordsWeb.Controllers
 {
+    [Authorize]
     public class PolicyHolderController : Controller
     {
         private readonly ApplicationDbContext _db;
-        
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public PolicyHolderController(ApplicationDbContext db)
+        public PolicyHolderController(ApplicationDbContext db, UserManager<ApplicationUser> userManager)
         {
             _db = db;
+            _userManager = userManager;
         }
-        public IActionResult Index()
-        {
-            var objInsuredList = _db.Insured.ToList();
-            //List<PolicyHolder> objInsuredList = _db.Insured.ToList();
-            return View(objInsuredList);
-        }
+        
         //GET
        /* public IActionResult Create()
         {     
@@ -30,7 +29,12 @@ namespace InsuranceRecordsWeb.Controllers
             {
                 return NotFound();
             }
-           
+            //prevents from creating a PolicyHolder under another user
+            if (userId != _userManager.GetUserId(User))
+            {
+                return NotFound();
+            }
+
             var policyHolder = new PolicyHolder();
             string userHolderId = (string)userId;
             
@@ -63,12 +67,17 @@ namespace InsuranceRecordsWeb.Controllers
             {
                 return NotFound();  
             }
-            var insuredFromDb = _db.Insured.Find(id);
+            var insuredFromDb = _db.Insured.Find(id);        
 
             if (insuredFromDb == null)
             {
                 return NotFound(insuredFromDb);
-            }           
+            }
+            //prevents from accessing any PolicyHolder by any user
+            if (insuredFromDb.UserId != _userManager.GetUserId(User))
+            {
+                return NotFound();
+            }
             return View(insuredFromDb);
         }
         //POST
@@ -99,11 +108,16 @@ namespace InsuranceRecordsWeb.Controllers
             {
                 return NotFound();
             }
-            var insuredFromDb = _db.Insured.Find(id);
+            var insuredFromDb = _db.Insured.Find(id);       
 
             if (insuredFromDb == null)
             {
                 return NotFound(insuredFromDb);
+            }
+            //prevents from accessing any PolicyHolder by any user
+            if (insuredFromDb.UserId != _userManager.GetUserId(User))
+            {
+                return NotFound();
             }
             return View(insuredFromDb);
         }

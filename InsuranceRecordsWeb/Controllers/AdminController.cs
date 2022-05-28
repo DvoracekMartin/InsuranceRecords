@@ -12,11 +12,26 @@ namespace InsuranceRecordsWeb.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly ApplicationDbContext _db;
 
-        public AdminController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
+        public AdminController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager, ApplicationDbContext db)
         {
             _userManager = userManager;
-            _roleManager = roleManager;           
+            _roleManager = roleManager;
+            _db = db;
+        }
+        public IActionResult InsuredList()
+        {
+            var objInsuredList = _db.Insured.ToList();
+            //List<PolicyHolder> objInsuredList = _db.Insured.ToList();
+            return View(objInsuredList);
+        }
+
+        public IActionResult InsuranceList()
+        {
+            //List<Insurance> objInsuredList = _db.Insurance.ToList();
+            var objInsuranceList = _db.Insurance.ToList();
+            return View(objInsuranceList);
         }
 
         public async Task<IActionResult> IndexRole()
