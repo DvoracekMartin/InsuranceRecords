@@ -28,12 +28,12 @@ namespace InsuranceRecordsWeb.Controllers
         {
             if (userId == "")
             {
-                return NotFound();
+                return RedirectToAction("NotFoundCustom", "Home");
             }
             //prevents from creating a PolicyHolder under another user
             if (userId != _userManager.GetUserId(User))
             {
-                return NotFound();
+                return RedirectToAction("NotFoundCustom", "Home");
             }
 
             var policyHolder = new PolicyHolder();
@@ -64,7 +64,7 @@ namespace InsuranceRecordsWeb.Controllers
 
                 _db.Insured.Add(obj);
                 _db.SaveChanges();
-                TempData["success"] = "Category created succesfully";
+                TempData["success"] = "Pojištěnec uložen.";
                 return RedirectToAction("Index", "User", new { id = obj.UserId });
             }
             return View(obj);           
@@ -75,18 +75,18 @@ namespace InsuranceRecordsWeb.Controllers
         {
             if (id == null || id == 0)
             {
-                return NotFound();  
+                return RedirectToAction("NotFoundCustom", "Home");
             }
             var insuredFromDb = _db.Insured.Find(id);        
 
             if (insuredFromDb == null)
             {
-                return NotFound(insuredFromDb);
+                return RedirectToAction("NotFoundCustom", "Home");
             }
             //prevents from accessing any PolicyHolder by any user
             if (insuredFromDb.UserId != _userManager.GetUserId(User))
             {
-                return NotFound();
+                return RedirectToAction("NotFoundCustom", "Home");
             }
             return View(insuredFromDb);
         }
@@ -105,7 +105,7 @@ namespace InsuranceRecordsWeb.Controllers
             {
                 _db.Insured.Update(obj);
                 _db.SaveChanges();
-                TempData["success"] = " updated succesfully";                              
+                TempData["success"] = "Pojištěnec aktualizován.";
                 return RedirectToAction("PolicyHolderDetail", "PolicyHolderDetail", new { id = obj.Id });
             }
             return View(obj);
@@ -116,18 +116,18 @@ namespace InsuranceRecordsWeb.Controllers
         {
             if (id == null || id == 0)
             {
-                return NotFound();
+                return RedirectToAction("NotFoundCustom", "Home");
             }
             var insuredFromDb = _db.Insured.Find(id);       
 
             if (insuredFromDb == null)
             {
-                return NotFound(insuredFromDb);
+                return RedirectToAction("NotFoundCustom", "Home");
             }
             //prevents from accessing any PolicyHolder by any user
             if (insuredFromDb.UserId != _userManager.GetUserId(User))
             {
-                return NotFound();
+                return RedirectToAction("NotFoundCustom", "Home");
             }
             return View(insuredFromDb);
         }
@@ -139,11 +139,11 @@ namespace InsuranceRecordsWeb.Controllers
             var obj = _db.Insured.Find(id);
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction("NotFoundCustom", "Home");
             }
             _db.Insured.Remove(obj);
             _db.SaveChanges();
-            TempData["success"] = "Category deleted succesfully";
+            TempData["success"] = "Pojištěnec odstraněn.";
             return RedirectToAction("Index", "User", new { id = obj.UserId });
 
         }

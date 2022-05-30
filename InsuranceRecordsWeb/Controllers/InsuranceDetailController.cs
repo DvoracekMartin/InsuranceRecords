@@ -19,14 +19,14 @@ namespace InsuranceRecordsWeb.Controllers
         {
             if (id == null || id == 0)
             {
-                return NotFound();
+                return RedirectToAction("NotFoundCustom", "Home");
             }
             var insuranceFromDb = await _db.Insurance.FindAsync(id);
 
 
             if (insuranceFromDb == null)
             {
-                return NotFound(insuranceFromDb);
+                return RedirectToAction("NotFoundCustom", "Home");
             }
 
             //prevents from accessing any Insurance by any user
@@ -34,11 +34,11 @@ namespace InsuranceRecordsWeb.Controllers
             var insuredFromDb = _db.Insured.Find(insuranceId);
             if (insuredFromDb == null)
             {
-                return NotFound(insuranceFromDb);
+                return RedirectToAction("NotFoundCustom", "Home");
             }
             if (insuredFromDb.UserId != _userManager.GetUserId(User))
             {
-                return NotFound();
+                return RedirectToAction("NotFoundCustom", "Home");
             }
 
             return View(insuranceFromDb);

@@ -208,7 +208,8 @@ namespace InsuranceRecordsWeb.Areas.Identity.Pages.Account.Manage
            
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            TempData["success"] = "Profil aktualizován.";
+            //StatusMessage = "Your profile has been updated";
             return RedirectToPage();
         }
     }

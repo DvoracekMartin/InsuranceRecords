@@ -19,18 +19,11 @@ namespace InsuranceRecordsWeb.Controllers
             _db = db;
         }
 
-        //public async Task<IActionResult> Index()
-        //{
-        //    var users = await _userManager.Users.ToListAsync();
-        //    return View(users);
-        //}
-
-
         public async Task<IActionResult> Index(string? id)
         {
             if (id == "")
             {
-                return NotFound();
+                return RedirectToAction("NotFoundCustom", "Home");
             }
 
             var user = await _userManager.FindByIdAsync(id);

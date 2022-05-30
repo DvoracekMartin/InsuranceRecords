@@ -83,13 +83,13 @@ namespace InsuranceRecordsWeb.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction("NotFoundCustom", "Home");
             }
             var role = await _roleManager.FindByIdAsync(id);
 
             if (role == null)
             {
-                return NotFound(role);
+                return RedirectToAction("NotFoundCustom", "Home");
             }
             return View(role);
         }
@@ -101,7 +101,7 @@ namespace InsuranceRecordsWeb.Controllers
             var role = await _roleManager.FindByIdAsync(id);
             if (role == null)
             {
-                return NotFound();
+                return RedirectToAction("NotFoundCustom", "Home");
             }
             await _roleManager.DeleteAsync(role);
             TempData["success"] = "Role úspěšně odstraněna";

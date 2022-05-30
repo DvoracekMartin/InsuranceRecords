@@ -23,19 +23,19 @@ namespace InsuranceRecordsWeb.Controllers
         {
             if (userId == null || userId == 0)
             {
-                return NotFound();
+                return RedirectToAction("NotFoundCustom", "Home");
             }
 
             var insuredFromDb = _db.Insured.Find(userId);
 
             if (insuredFromDb == null)
             {
-                return NotFound(insuredFromDb);
+                return RedirectToAction("NotFoundCustom", "Home");
             }
             //prevents from creating any Insurance under any user
             if (insuredFromDb.UserId != _userManager.GetUserId(User))
             {
-                return NotFound();
+                return RedirectToAction("NotFoundCustom", "Home");
             }
 
             var dateTime = DateTime.Now.Date;
@@ -55,7 +55,7 @@ namespace InsuranceRecordsWeb.Controllers
             {              
                 _db.Insurance.Add(obj);
                 _db.SaveChanges();
-                TempData["success"] = "Category created succesfully";
+                TempData["success"] = "Pojištění uloženo.";
                 return RedirectToAction("PolicyHolderDetail", "PolicyHolderDetail", new { id = obj.InsuranceHolderId });
             }
             return View(obj);
@@ -66,24 +66,24 @@ namespace InsuranceRecordsWeb.Controllers
         {
             if (id == null || id == 0)
             {
-                return NotFound();
+                return RedirectToAction("NotFoundCustom", "Home");
             }
             var insuranceFromDb = _db.Insurance.Find(id);
 
             if (insuranceFromDb == null)
             {
-                return NotFound(insuranceFromDb);
+                return RedirectToAction("NotFoundCustom", "Home");
             }
             //prevents from accessing any Insurance by any user
             int insuranceId = insuranceFromDb.InsuranceHolderId;
             var insuredFromDb = _db.Insured.Find(insuranceId);
             if (insuredFromDb == null)
             {
-                return NotFound(insuranceFromDb);
+                return RedirectToAction("NotFoundCustom", "Home");
             }
             if (insuredFromDb.UserId != _userManager.GetUserId(User))
             {
-                return NotFound();
+                return RedirectToAction("NotFoundCustom", "Home");
             }
 
             return View(insuranceFromDb);
@@ -98,7 +98,7 @@ namespace InsuranceRecordsWeb.Controllers
             {
                 _db.Insurance.Update(obj);
                 _db.SaveChanges();
-                TempData["success"] = " updated succesfully";
+                TempData["success"] = "Pojištění aktualizováno.";
                 return RedirectToAction("PolicyHolderDetail", "PolicyHolderDetail", new { id = obj.InsuranceHolderId });
             }
             return View(obj);
@@ -109,24 +109,24 @@ namespace InsuranceRecordsWeb.Controllers
         {
             if (id == null || id == 0)
             {
-                return NotFound();
+                return RedirectToAction("NotFoundCustom", "Home");
             }
             var insuranceFromDb = _db.Insurance.Find(id);
 
             if (insuranceFromDb == null)
             {
-                return NotFound(insuranceFromDb);
+                return RedirectToAction("NotFoundCustom", "Home");
             }
             //prevents from accessing any Insurance by any user
             int insuranceId = insuranceFromDb.InsuranceHolderId;
             var insuredFromDb = _db.Insured.Find(insuranceId);
             if (insuredFromDb == null)
             {
-                return NotFound(insuranceFromDb);
+                return RedirectToAction("NotFoundCustom", "Home");
             }
             if (insuredFromDb.UserId != _userManager.GetUserId(User))
             {
-                return NotFound();
+                return RedirectToAction("NotFoundCustom", "Home");
             }
 
             return View(insuranceFromDb);
@@ -139,11 +139,11 @@ namespace InsuranceRecordsWeb.Controllers
             var obj = _db.Insurance.Find(id);
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction("NotFoundCustom", "Home");
             }
             _db.Insurance.Remove(obj);
             _db.SaveChanges();
-            TempData["success"] = "Category deleted succesfully";
+            TempData["success"] = "Pojištění odstraněno.";
             return RedirectToAction("PolicyHolderDetail", "PolicyHolderDetail", new { id = obj.InsuranceHolderId });
 
         }

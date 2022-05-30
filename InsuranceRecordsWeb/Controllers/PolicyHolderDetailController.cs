@@ -16,39 +16,24 @@ namespace InsuranceRecordsWeb.Controllers
             _db = db;
             _userManager = userManager;
         }
-        //public async Task <IActionResult> Detail(int? id)
-        //{
-        //    if (id == null || id == 0)
-        //    {
-        //        return NotFound();
-        //    }
-        //    var insuredFromDb = await _db.Insured.FindAsync(id);
-           
-
-        //    if (insuredFromDb == null)
-        //    {
-        //        return NotFound(insuredFromDb);
-        //    }
-            
-        //    return View(insuredFromDb);
-        //}
-
+    
         public async Task<IActionResult> PolicyHolderDetail(int? id)
         {
             if (id == null || id == 0)
             {
-                return NotFound();
+                return RedirectToAction("NotFoundCustom", "Home");
             }
             
             var insuredFromDb = await _db.Insured.FindAsync(id);
             if (insuredFromDb == null)
             {
-                return NotFound(insuredFromDb);
+                return RedirectToAction("NotFoundCustom", "Home");
             }
+
             //prevents from accessing a PolicyHolder by any user
             if (insuredFromDb.UserId != _userManager.GetUserId(User))
             {
-                return NotFound();
+                return RedirectToAction("NotFoundCustom", "Home");
             }
 
             var policyHolderInsuranceModel = new PolicyHolderInsuranceModel();
@@ -71,14 +56,11 @@ namespace InsuranceRecordsWeb.Controllers
         }
 
         private async Task<List<Insurance>> GetInsurances(int? id)
-        {
-            //var insurancesFromDb = _db.Insurance.Find();
-            //return insurancesFromDb;
+        {         
             var insuranecOfHolder = from i in _db.Insurance
                                     where i.InsuranceHolderId == id
                                     select i;
             return insuranecOfHolder.ToList();
-            //return new List<Insurance>(_db.Insurance.ToList());
         }
 
 
