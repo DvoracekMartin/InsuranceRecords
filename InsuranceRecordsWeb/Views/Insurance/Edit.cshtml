@@ -16,7 +16,7 @@
 			<div class="col-md-6 mb-3">
 				<label asp-for="InsuranceType"></label>
 				@*<input asp-for="InsuranceType" class="form-control"/>*@			
-				<select asp-for="InsuranceType" class="form-control">
+				<select asp-for="InsuranceType" class="form-control" aria-required="true">
 					<option value="">Vyberte</option>
 					<option value="Osoby">Osoby</option>
 					<option value="Majetku">Majetku</option>
@@ -28,24 +28,24 @@
 		<div class="row">
 			<div class="col-md-6 mb-3">
 				<label asp-for="InsuranceSubject"></label>
-				<input asp-for="InsuranceSubject" class="form-control" />
+				<input asp-for="InsuranceSubject" class="form-control" aria-required="true"/>
 				<span asp-validation-for="InsuranceSubject" class="text-danger"></span>
 			</div>
 			<div class="col-md-6 mb-3">
 				<label asp-for="InsuranceAmount"></label>
-				<input asp-for="InsuranceAmount" class="form-control" />
+				<input asp-for="InsuranceAmount" class="form-control" aria-required="true"/>
 				<span asp-validation-for="InsuranceAmount" class="text-danger"></span>
 			</div>			
 		</div>
 		<div class="row">
 			<div class="col-md-6 mb-3">
 				<label asp-for="InsuranceValidFrom"></label>
-				<input asp-for="InsuranceValidFrom" class="form-control"/>
+				<input asp-for="InsuranceValidFrom" class="form-control" aria-required="true"/>
 				<span asp-validation-for="InsuranceValidFrom" class="text-danger"></span>
 			</div>
 			<div class="col-md-6 mb-3">
 				<label asp-for="InsuranceValidUntil"></label>
-				<input asp-for="InsuranceValidUntil" class="form-control"/>
+				<input asp-for="InsuranceValidUntil" class="form-control" aria-required="true"/>
 				<span asp-validation-for="InsuranceValidUntil" class="text-danger"></span>
 			</div>		
 		</div>

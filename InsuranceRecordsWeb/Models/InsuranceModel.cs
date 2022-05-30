@@ -7,22 +7,23 @@ namespace InsuranceRecordsWeb.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Toto pole je povinné")]
         public int InsuranceHolderId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Toto pole je povinné")]
         [DisplayName("Pojištění")]
         public string InsuranceType { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Toto pole je povinné")]
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Neplatná částka")]
         [DisplayName("Částka v Kč")]
         public string InsuranceAmount { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Toto pole je povinné")]
         [DisplayName("Předmět pojištění")]
         public string InsuranceSubject { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Toto pole je povinné")]
         [DataType(DataType.Date)]
         [DisplayName("Platnost od")]
         public DateTime InsuranceValidFrom { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Toto pole je povinné")]
         [DataType(DataType.Date)]
         [DisplayName("Platnost do")]
         public DateTime InsuranceValidUntil { get; set; }

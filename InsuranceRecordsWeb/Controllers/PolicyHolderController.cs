@@ -11,6 +11,7 @@ namespace InsuranceRecordsWeb.Controllers
     {
         private readonly ApplicationDbContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
+        public PolicyHolder PolicyHolder { get; set; }
 
         public PolicyHolderController(ApplicationDbContext db, UserManager<ApplicationUser> userManager)
         {
@@ -52,6 +53,15 @@ namespace InsuranceRecordsWeb.Controllers
             }*/
             if (ModelState.IsValid)
             {
+                obj.Name = Uppercase(obj.Name.Trim().ToLower());
+                obj.LastName = Uppercase(obj.LastName.Trim().ToLower());
+                obj.EMail = obj.EMail.Trim();
+                obj.TelephoneNumber = obj.TelephoneNumber.Trim();
+                obj.StreetName = Uppercase(obj.StreetName.Trim());
+                obj.BuildingNumber = obj.BuildingNumber.Trim();
+                obj.CityName = Uppercase(obj.CityName.Trim());
+                obj.ZIPCode = obj.ZIPCode.Trim();
+
                 _db.Insured.Add(obj);
                 _db.SaveChanges();
                 TempData["success"] = "Category created succesfully";
@@ -135,9 +145,14 @@ namespace InsuranceRecordsWeb.Controllers
             _db.SaveChanges();
             TempData["success"] = "Category deleted succesfully";
             return RedirectToAction("Index", "User", new { id = obj.UserId });
-            
+
         }
 
-        
+        //Returns string from the parameter with the uppercased first letter 
+        public string Uppercase(string str)
+        {
+            return char.ToUpper(str[0]) + str.Substring(1);
+        }
+
     }
 }
