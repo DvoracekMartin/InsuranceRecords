@@ -13,8 +13,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         : base(options)
     {
     }
-    public DbSet<PolicyHolder> Insured { get; set; }
-    public DbSet<Insurance> Insurance { get; set; }
+    public DbSet<PolicyHolderModel> Insured { get; set; }
+    public DbSet<InsuranceModel> Insurance { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);

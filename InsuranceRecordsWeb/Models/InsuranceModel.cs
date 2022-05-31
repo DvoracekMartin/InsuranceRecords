@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace InsuranceRecordsWeb.Models
 {
-    public class Insurance
+    public class InsuranceModel
     {
         [Key]
         public int Id { get; set; }

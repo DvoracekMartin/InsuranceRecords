@@ -2,7 +2,7 @@
 
 namespace InsuranceRecordsWeb.Models
 {
-    public class PolicyHolderInsuranceModel
+    public class PolicyHolderDetailModel
     {
         public int PolicyHolderId { get; set; }
 
@@ -29,6 +29,6 @@ namespace InsuranceRecordsWeb.Models
         [DisplayName("PSČ")]
         public string ZIPCode { get; set; }
 
-        public List<Insurance> Insurances { get; set; }
+        public List<InsuranceModel> Insurances { get; set; }
     }
 }

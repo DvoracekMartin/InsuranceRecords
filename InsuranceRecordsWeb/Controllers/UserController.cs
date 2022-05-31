@@ -45,7 +45,7 @@ namespace InsuranceRecordsWeb.Controllers
             return View(userViewModel);
 
         }
-        private async Task<List<PolicyHolder>> GetPolicyHolders(string? id)
+        private async Task<List<PolicyHolderModel>> GetPolicyHolders(string? id)
         {
             //var insurancesFromDb = _db.Insurance.Find();
             //return insurancesFromDb;

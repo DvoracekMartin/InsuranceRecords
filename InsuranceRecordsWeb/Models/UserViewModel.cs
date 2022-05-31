@@ -22,6 +22,6 @@ namespace InsuranceRecordsWeb.Models
         [DisplayName("Telefonní číslo")]
         public string TelephoneNumber { get; set; }
 
-        public List<PolicyHolder> PolicyHolders { get; set; }
+        public List<PolicyHolderModel> PolicyHolders { get; set; }
     }
 }

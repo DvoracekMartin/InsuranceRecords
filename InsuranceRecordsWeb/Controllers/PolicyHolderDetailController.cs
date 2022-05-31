@@ -36,9 +36,9 @@ namespace InsuranceRecordsWeb.Controllers
                 return RedirectToAction("NotFoundCustom", "Home");
             }
 
-            var policyHolderInsuranceModel = new PolicyHolderInsuranceModel();
+            var policyHolderInsuranceModel = new PolicyHolderDetailModel();
 
-            var thisModel = new PolicyHolderInsuranceModel();
+            var thisModel = new PolicyHolderDetailModel();
             thisModel.PolicyHolderId = insuredFromDb.Id;    
             thisModel.Name = insuredFromDb.Name;
             thisModel.LastName = insuredFromDb.LastName;
@@ -55,7 +55,7 @@ namespace InsuranceRecordsWeb.Controllers
 
         }
 
-        private async Task<List<Insurance>> GetInsurances(int? id)
+        private async Task<List<InsuranceModel>> GetInsurances(int? id)
         {         
             var insuranecOfHolder = from i in _db.Insurance
                                     where i.InsuranceHolderId == id

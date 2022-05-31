@@ -39,7 +39,7 @@ namespace InsuranceRecordsWeb.Controllers
             }
 
             var dateTime = DateTime.Now.Date;
-            var insurance = new Insurance();
+            var insurance = new InsuranceModel();
             int holderId = (int)userId;
             insurance.InsuranceValidFrom = dateTime;
             insurance.InsuranceValidUntil = dateTime;                       
@@ -49,7 +49,7 @@ namespace InsuranceRecordsWeb.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Insurance obj)
+        public IActionResult Create(InsuranceModel obj)
         {       
             if (ModelState.IsValid)
             {              
@@ -91,7 +91,7 @@ namespace InsuranceRecordsWeb.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Insurance obj)
+        public IActionResult Edit(InsuranceModel obj)
         {
          
             if (ModelState.IsValid)

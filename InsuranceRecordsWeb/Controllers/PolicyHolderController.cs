@@ -11,7 +11,7 @@ namespace InsuranceRecordsWeb.Controllers
     {
         private readonly ApplicationDbContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
-        public PolicyHolder PolicyHolder { get; set; }
+        public PolicyHolderModel PolicyHolder { get; set; }
 
         public PolicyHolderController(ApplicationDbContext db, UserManager<ApplicationUser> userManager)
         {
@@ -36,7 +36,7 @@ namespace InsuranceRecordsWeb.Controllers
                 return RedirectToAction("NotFoundCustom", "Home");
             }
 
-            var policyHolder = new PolicyHolder();
+            var policyHolder = new PolicyHolderModel();
             string userHolderId = (string)userId;
             
             policyHolder.UserId = userHolderId;
@@ -45,7 +45,7 @@ namespace InsuranceRecordsWeb.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(PolicyHolder obj)
+        public IActionResult Create(PolicyHolderModel obj)
         {
             /*if (obj.Name == obj.DisplayOrder.ToString())
             {
@@ -93,7 +93,7 @@ namespace InsuranceRecordsWeb.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(PolicyHolder obj)
+        public IActionResult Edit(PolicyHolderModel obj)
         {
             /*if (obj.Name == obj.DisplayOrder.ToString())
             {
