@@ -15,6 +15,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     }
     public DbSet<PolicyHolderModel> Insured { get; set; }
     public DbSet<InsuranceModel> Insurance { get; set; }
+    public DbSet<InsuranceEventModel> Event { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
