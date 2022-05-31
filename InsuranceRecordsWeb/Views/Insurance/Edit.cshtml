@@ -5,13 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<form method="post"><!--asp-action="Edit"-->
-	<div class="p-3 mt-4">
-		<div class="row pb-2">
-			<h2 class="text-primary">Editovat pojištění</h2>
-		</div>
-		<hr class="border-2 border-top border-primary">
-		@*<div asp-validation-summary="All"></div>*@
+
+@*<div asp-validation-summary="All"></div>*@
+
+<form method="post">
+	<div class="container">
 		<div class="row pt-4">
 			<div class="col-md-6 mb-3">
 				<label asp-for="InsuranceType"></label>

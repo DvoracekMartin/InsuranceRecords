@@ -1,22 +1,13 @@
 ﻿@model IEnumerable<InsuranceModel>
 @{
-    ViewData["Title"] = "InsuranceList";
+    ViewData["Title"] = "Pojištění";
 }
 
-<div class="container p3-">
-    <div class="row pt-4 align-items-center">
-        <div class="text-center col-sm-6 text-sm-start">
-            <h2 class="text-primary">Pojištění</h2>
-        </div>     
-    </div>
-    <hr class="border-2 border-top border-primary">
-
-
+<div class="container">
     <div class="row pt-4">
         <div class="col-6 col-sm-4 text-decoration-underline">Pojištění</div>
         <div class="col-6 col-sm-4 text-decoration-underline">Částka</div>
     </div>
-
     @foreach(var obj in Model) 
     {   //Vypsání pojištěnců
         <div class="row pt-4 align-items-center">
@@ -43,5 +34,4 @@
                         </div>  *@    
         </div>
     }
-
 </div>

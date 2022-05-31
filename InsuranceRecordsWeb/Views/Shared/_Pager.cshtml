@@ -16,7 +16,7 @@
                     {
                         <a class="page-link" asp-controller="User" asp-action="Index" asp-route-pg="@(Model.CurrentPage-1)">Předchozí</a>
                     }
-                    @if (ViewData["Title"] == "Detail")
+                    @if (ViewData["Title"] == "Detail pojištěnce")
                     {
                         <a class="page-link" asp-controller="PolicyHolderDetail" asp-action="PolicyHolderDetail" asp-route-pg="@(Model.CurrentPage-1)">Předchozí</a>
                     } 
@@ -35,7 +35,7 @@
                     {
                         <a class="page-link" asp-controller="User" asp-action="Index" asp-route-pg="@pge">@pge</a>
                     }
-                    @if (ViewData["Title"] == "Detail")
+                    @if (ViewData["Title"] == "Detail pojištěnce")
                     {
                         <a class="page-link" asp-controller="PolicyHolderDetail" asp-action="PolicyHolderDetail" asp-route-pg="@pge">@pge</a>
                     }                 
@@ -54,7 +54,7 @@
                     {
                         <a class="page-link" asp-controller="User" asp-action="Index" asp-route-pg="@(Model.CurrentPage+1)">Další</a>
                     }
-                    @if (ViewData["Title"] == "Detail")
+                    @if (ViewData["Title"] == "Detail pojištěnce")
                     {
                         <a class="page-link" asp-controller="PolicyHolderDetail" asp-action="PolicyHolderDetail" asp-route-pg="@(Model.CurrentPage+1)">Další</a>
                     } 

@@ -3,16 +3,12 @@
 @model PolicyHolderModel
 @inject UserManager<ApplicationUser> UserManager
 @{
-    ViewData["Title"] = "Přidat pojištěnce";
+    ViewData["Title"] = "Nový pojištěnec";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <form method="post">
-	<div class="p-3 mt-4">
-		<div class="row pb-2">
-			<h2 class="text-primary">Nový pojištěnec</h2>
-		</div>
-		<hr class="border-2 border-top border-primary">
+	<div class="container">  
 		@*<div asp-validation-summary="All"></div>*@
 		<div class="row pt-4">
 			<div class="col-md-6 mb-3">

@@ -12,19 +12,7 @@
         pageNo = pager.CurrentPage;
     }
 }
-<div class="container p3-">
-    <div class="row pt-4 align-items-center">
-        <div class="text-center col-12 col-md-6 text-md-start">
-            <h2 class="text-primary">Moji Pojištěnci</h2>
-        </div>
-        <div class="text-center col-12 col-md-6 text-md-end">
-             <div class="p-1"><a asp-controller="PolicyHolder" asp-action="Create" asp-route-userId=@Model.UserId class="btn btn-primary">
-                <i class="bi bi-plus-circle"></i> &nbsp;Přidat nového pojištěnce</a>
-            </div>
-        </div>
-    </div>
-    <hr class="border-2 border-top border-primary">
-    
+<div class="container">
     @*if there's no insured, we skip the loop for listing PolicyHolders/Insured*@
     @if (Model.PolicyHolders.Count > 0)
     {

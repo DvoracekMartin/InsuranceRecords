@@ -68,6 +68,30 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+            <div class="container">
+                <div class="row pt-4 align-items-center">
+                    <div class="text-center col-12 col-md-6 text-sm-start">
+                        <h2 class="text-primary">@ViewData["Title"]</h2>
+                    </div>      
+                    @if (ViewData["Title"] == "Moji pojištěnci")
+                    {
+                        <div class="text-center col-12 col-md-6 text-md-end">
+                            <div class="p-1"><a asp-controller="PolicyHolder" asp-action="Create" asp-route-userId=@Model.UserId class="btn btn-primary">
+                            <i class="bi bi-plus-circle"></i> &nbsp;Přidat nového pojištěnce</a>
+                            </div>
+                        </div>
+                    }       
+                    @if (ViewData["Title"] == "Role")
+                    {
+                        <div class="text-center col-12 col-sm-6 text-md-end">
+                            <div class="p-1"><a asp-controller="Admin" asp-action="CreateRole" class="btn btn-primary">
+                            <i class="bi bi-plus-circle"></i> &nbsp;Přidat novou roli</a>
+                            </div>
+                        </div> 
+                    }
+                </div>
+                <hr class="border-2 border-top border-primary">
+            </div>
             <partial name="_Notification" />
             @RenderBody()
         </main>

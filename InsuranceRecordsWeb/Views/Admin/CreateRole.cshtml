@@ -1,15 +1,11 @@
 ﻿@model RolesModel
 
 @{
-    ViewData["Title"] = "Role - přidat";
+    ViewData["Title"] = "Přidat roli";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <form asp-action="CreateRole">
-	<div class="p-3 mt-4">
-		<div class="row pb-2">
-			<h2 class="text-primary">Přidat roli</h2>
-		</div>
-		<hr class="border-2 border-top border-primary">
+	<div class="container">   
 		@*<div asp-validation-summary="All"></div>*@
 		<div class="row pt-4">
 			<div class="col-md-8 col-lg-6 mb-3">
