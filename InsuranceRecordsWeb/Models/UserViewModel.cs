@@ -23,5 +23,6 @@ namespace InsuranceRecordsWeb.Models
         public string TelephoneNumber { get; set; }
 
         public List<PolicyHolderModel> PolicyHolders { get; set; }
+
     }
 }

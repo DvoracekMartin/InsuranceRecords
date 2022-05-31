@@ -1,8 +1,16 @@
 ﻿@model UserViewModel
 
-	@{
+@{
     ViewData["Title"] = "Moji pojištěnci";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    PagerModel pager = new PagerModel();
+    int pageNo = 0;
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+    }
 }
 <div class="container p3-">
     <div class="row pt-4 align-items-center">
@@ -17,7 +25,7 @@
     </div>
     <hr class="border-2 border-top border-primary">
     
-    @*if there's no insured, we skip the loop for listing insured*@
+    @*if there's no insured, we skip the loop for listing PolicyHolders/Insured*@
     @if (Model.PolicyHolders.Count > 0)
     {
         <div class="row pt-4">
@@ -25,8 +33,9 @@
             <div class="col-6 text-decoration-underline">Adresa</div>
         </div>
 
+        //Liisting all of the PolicyHolders/Insured
         @foreach (var obj in Model.PolicyHolders)
-        {   //Vypsání pojištěnců
+        {   
             <div class="row pt-4 align-items-center">
                 <div class="col-3 col-lg-2">@obj.Name @obj.LastName</div>          
                 <div class="col-3 col-lg-2 text-center">    
@@ -52,3 +61,5 @@
         </div>     
     }
 </div>
+
+<partial name="_Pager" model="@pager"/>

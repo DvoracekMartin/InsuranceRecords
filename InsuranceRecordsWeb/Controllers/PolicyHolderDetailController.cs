@@ -17,7 +17,7 @@ namespace InsuranceRecordsWeb.Controllers
             _userManager = userManager;
         }
     
-        public async Task<IActionResult> PolicyHolderDetail(int? id)
+        public async Task<IActionResult> PolicyHolderDetail(int? id, int pg = 1)
         {
             if (id == null || id == 0)
             {
@@ -49,7 +49,21 @@ namespace InsuranceRecordsWeb.Controllers
             thisModel.CityName = insuredFromDb.CityName;
             thisModel.ZIPCode = insuredFromDb.ZIPCode;
             thisModel.Insurances = await GetInsurances(id);
+
+            //pagination
+            const int pageSize = 3;
+            if (pg < 1)
+            {
+                pg = 1;
+            }
+            int recsCount = thisModel.Insurances.Count();
+            var pager = new PagerModel(recsCount, pg, pageSize);
+            int recSkip = (pg - 1) * pageSize;
+
+            thisModel.Insurances = thisModel.Insurances.Skip(recSkip).Take(pager.PageSize).ToList();
             policyHolderInsuranceModel = thisModel;
+
+            this.ViewBag.Pager = pager;
 
             return View(policyHolderInsuranceModel);
 

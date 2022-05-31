@@ -19,7 +19,7 @@ namespace InsuranceRecordsWeb.Controllers
             _db = db;
         }
 
-        public async Task<IActionResult> Index(string? id)
+        public async Task<IActionResult> Index(string? id, int pg=1)
         {
             if (id == "")
             {
@@ -27,7 +27,11 @@ namespace InsuranceRecordsWeb.Controllers
             }
 
             var user = await _userManager.FindByIdAsync(id);
-            var userViewModel = new UserViewModel();
+            if (user == null)
+            {
+                return RedirectToAction("NotFoundCustom", "Home");
+            }
+            var userViewModel = new UserViewModel();        
 
             var thisModel = new UserViewModel();
             thisModel.UserId = user.Id;
@@ -40,10 +44,23 @@ namespace InsuranceRecordsWeb.Controllers
             thisModel.Email = user.Email;
             thisModel.TelephoneNumber = user.TelephoneNumber;
             thisModel.PolicyHolders = await GetPolicyHolders(id);
-            userViewModel = thisModel;
+
+            //pagination
+            const int pageSize = 5;
+            if (pg < 1)
+            {
+                pg = 1;
+            }
+            int recsCount = thisModel.PolicyHolders.Count();
+            var pager = new PagerModel(recsCount, pg, pageSize);
+            int recSkip = (pg - 1) * pageSize;
+
+            thisModel.PolicyHolders = thisModel.PolicyHolders.Skip(recSkip).Take(pager.PageSize).ToList();
+            userViewModel = thisModel;       
+            
+            this.ViewBag.Pager = pager;
 
             return View(userViewModel);
-
         }
         private async Task<List<PolicyHolderModel>> GetPolicyHolders(string? id)
         {
