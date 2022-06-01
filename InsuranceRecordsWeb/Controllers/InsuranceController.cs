@@ -17,7 +17,7 @@ namespace InsuranceRecordsWeb.Controllers
             _db = db;
             _userManager = userManager;
         }
-       
+        //Insurance/Create/id
         //GET
         public IActionResult Create(int? userId)
         {
@@ -32,7 +32,7 @@ namespace InsuranceRecordsWeb.Controllers
             {
                 return RedirectToAction("NotFoundCustom", "Home");
             }
-            //prevents from creating any Insurance under any user
+            //prevents from creating any Insurance under any user, redirecting to "error" page
             if (insuredFromDb.UserId != _userManager.GetUserId(User))
             {
                 return RedirectToAction("NotFoundCustom", "Home");
@@ -60,7 +60,7 @@ namespace InsuranceRecordsWeb.Controllers
             }
             return View(obj);
         }
-
+        //Insurance/Edit/id
         //GET
         public IActionResult Edit(int? id)
         {
@@ -74,7 +74,7 @@ namespace InsuranceRecordsWeb.Controllers
             {
                 return RedirectToAction("NotFoundCustom", "Home");
             }
-            //prevents from accessing any Insurance by any user
+            //prevents from accessing any Insurance by any user, redirecting to "error" page
             int insuranceId = insuranceFromDb.InsuranceHolderId;
             var insuredFromDb = _db.Insured.Find(insuranceId);
             if (insuredFromDb == null)
@@ -92,8 +92,7 @@ namespace InsuranceRecordsWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(InsuranceModel obj)
-        {
-         
+        {         
             if (ModelState.IsValid)
             {
                 _db.Insurance.Update(obj);
@@ -103,7 +102,7 @@ namespace InsuranceRecordsWeb.Controllers
             }
             return View(obj);
         }
-
+        //Insurance/Delete/id
         //GET
         public IActionResult Delete(int? id)
         {
@@ -117,7 +116,7 @@ namespace InsuranceRecordsWeb.Controllers
             {
                 return RedirectToAction("NotFoundCustom", "Home");
             }
-            //prevents from accessing any Insurance by any user
+            //prevents from accessing any Insurance by any user, redirecting to "error" page
             int insuranceId = insuranceFromDb.InsuranceHolderId;
             var insuredFromDb = _db.Insured.Find(insuranceId);
             if (insuredFromDb == null)

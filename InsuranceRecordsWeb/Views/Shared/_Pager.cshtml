@@ -20,7 +20,7 @@
                     {
                         <a class="page-link" asp-controller="PolicyHolderDetail" asp-action="PolicyHolderDetail" asp-route-pg="@(Model.CurrentPage-1)">Předchozí</a>
                     } 
-                    @if (ViewData["Title"] == "Moji pojištěnci a pojištění")
+                    @if (ViewData["Title"] == "Pojistné události")
                     {
                         <a class="page-link" asp-controller="InsuranceEvent" asp-action="Index" asp-route-pg="@(Model.CurrentPage-1)">Předchozí</a>
                     } 
@@ -43,7 +43,7 @@
                     {
                         <a class="page-link" asp-controller="PolicyHolderDetail" asp-action="PolicyHolderDetail" asp-route-pg="@pge">@pge</a>
                     }    
-                    @if (ViewData["Title"] == "Moji pojištěnci a pojištění")
+                    @if (ViewData["Title"] == "Pojistné události")
                     {
                         <a class="page-link" asp-controller="InsuranceEvent" asp-action="Index" asp-route-pg="@pge">@pge</a>
                     }  
@@ -66,7 +66,7 @@
                     {
                         <a class="page-link" asp-controller="PolicyHolderDetail" asp-action="PolicyHolderDetail" asp-route-pg="@(Model.CurrentPage+1)">Další</a>
                     } 
-                    @if (ViewData["Title"] == "Moji pojištěnci a pojištění")
+                    @if (ViewData["Title"] == "Pojistné události")
                     {
                         <a class="page-link" asp-controller="InsuranceEvent" asp-action="Index" asp-route-pg="@(Model.CurrentPage+1)">Další</a>
                     } 

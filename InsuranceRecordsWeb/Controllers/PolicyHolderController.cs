@@ -18,19 +18,15 @@ namespace InsuranceRecordsWeb.Controllers
             _db = db;
             _userManager = userManager;
         }
-        
+        //PolicyHolder/Create/id
         //GET
-       /* public IActionResult Create()
-        {     
-            return View();
-        }*/
         public IActionResult Create(string? userId)
         {
             if (userId == "")
             {
                 return RedirectToAction("NotFoundCustom", "Home");
             }
-            //prevents from creating a PolicyHolder under another user
+            //prevents from creating a PolicyHolder under another user, redirecting to "error" page
             if (userId != _userManager.GetUserId(User))
             {
                 return RedirectToAction("NotFoundCustom", "Home");
@@ -47,10 +43,6 @@ namespace InsuranceRecordsWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(PolicyHolderModel obj)
         {
-            /*if (obj.Name == obj.DisplayOrder.ToString())
-            {
-                ModelState.AddModelError("CustomError", "The DisplayOrder cannot exactly match the name.");
-            }*/
             if (ModelState.IsValid)
             {
                 obj.Name = Uppercase(obj.Name.Trim().ToLower());
@@ -69,7 +61,7 @@ namespace InsuranceRecordsWeb.Controllers
             }
             return View(obj);           
         }
-
+        //PolicyHolder/Edit/id
         //GET
         public IActionResult Edit(int? id)
         {
@@ -83,7 +75,7 @@ namespace InsuranceRecordsWeb.Controllers
             {
                 return RedirectToAction("NotFoundCustom", "Home");
             }
-            //prevents from accessing any PolicyHolder by any user
+            //prevents from accessing any PolicyHolder by any user, redirecting to "error" page
             if (insuredFromDb.UserId != _userManager.GetUserId(User))
             {
                 return RedirectToAction("NotFoundCustom", "Home");
@@ -95,12 +87,6 @@ namespace InsuranceRecordsWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(PolicyHolderModel obj)
         {
-            /*if (obj.Name == obj.DisplayOrder.ToString())
-            {
-                ModelState.AddModelError("CustomError", "The DisplayOrder cannot exactly match the name.");
-            }*/
-
-
             if (ModelState.IsValid)
             {
                 _db.Insured.Update(obj);
@@ -110,7 +96,7 @@ namespace InsuranceRecordsWeb.Controllers
             }
             return View(obj);
         }
-        
+        //PolicyHolder/Delete/id
         //GET
         public IActionResult Delete(int? id)
         {
@@ -124,7 +110,7 @@ namespace InsuranceRecordsWeb.Controllers
             {
                 return RedirectToAction("NotFoundCustom", "Home");
             }
-            //prevents from accessing any PolicyHolder by any user
+            //prevents from accessing any PolicyHolder by any user, redirecting to "error" page
             if (insuredFromDb.UserId != _userManager.GetUserId(User))
             {
                 return RedirectToAction("NotFoundCustom", "Home");

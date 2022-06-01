@@ -20,7 +20,7 @@ namespace InsuranceRecordsWeb.Controllers
             _userManager = userManager;
         }
 
-        //Listing Holders and their Insurances
+        //Listing Policy Holders/Insured and their linked Insurances
         public async Task<IActionResult> Index(string? id, int pg = 1)
         {
             if (id == "")
@@ -32,11 +32,12 @@ namespace InsuranceRecordsWeb.Controllers
             {
                 return RedirectToAction("NotFoundCustom", "Home");
             }
+            //getting insured from db based on logged in user id
             var insuredFromDb = from i in _db.Insured
                                 where i.UserId == user.Id
                                 select i;
 
-            //prevents from accessing a HoldersInsurancesViewModel by any user
+            //prevents from accessing a HoldersInsurancesViewModel by any user, redirecting to "error" page
             if (insuredFromDb.Count() > 0)
             {
                 if (insuredFromDb.First().UserId != _userManager.GetUserId(User))
@@ -44,22 +45,24 @@ namespace InsuranceRecordsWeb.Controllers
                     return RedirectToAction("NotFoundCustom", "Home");
                 }
             }
-
+            //creating list of IDs of PolicyHolders/Insured
             List<int> Ids = new List<int>();
             foreach (var insured in insuredFromDb)
             {
                 int holderId = insured.Id;
                 Ids.Add(holderId);
             }
+            //getting insurances from db based on list of insured IDs
             var insurancesFromDb = _db.Insurance.Where(insurance => Ids.Contains(insurance.InsuranceHolderId))
                      .Select(a => a).ToList();
-
+            //creating list of IDs of Insurances
             List<int> InsuranceIds = new List<int>();
             foreach (var insurance in insurancesFromDb)
             {
                 int insuranceId = insurance.Id;
                 InsuranceIds.Add(insuranceId);
             }
+            //getting insurance events from db based on list of insurances IDs
             var insuranceEventsFromDb = _db.Event.Where(ev => InsuranceIds.Contains(ev.InsuranceId))
                      .Select(a => a).ToList();
 
@@ -87,7 +90,7 @@ namespace InsuranceRecordsWeb.Controllers
 
             return View(holdersInsurancesModel);
         }
-
+        //InsuranceEvent/Create/id
         //GET
         public IActionResult Create(int? insuranceId)
         {
@@ -106,7 +109,7 @@ namespace InsuranceRecordsWeb.Controllers
             {
                 return RedirectToAction("NotFoundCustom", "Home");
             }
-            //prevents from creating any InsuranceEvent under any user
+            //prevents from creating any InsuranceEvent under any user, redirecting to "error" page
             if (insuredFromDb.UserId != _userManager.GetUserId(User))
             {
                 return RedirectToAction("NotFoundCustom", "Home");
@@ -139,7 +142,7 @@ namespace InsuranceRecordsWeb.Controllers
             }
             return View(obj);
         }
-
+        //InsuranceEvent/Edit/id
         //GET
         public IActionResult Edit(int? id)
         {
@@ -153,7 +156,7 @@ namespace InsuranceRecordsWeb.Controllers
             {
                 return RedirectToAction("NotFoundCustom", "Home");
             }
-            //prevents from accessing any InsuranceEvent by any user
+            //prevents from accessing any InsuranceEvent by any user, redirecting to "error" page
             int holderId = insuranceEventFromDb.PolicyHolderId;
             var insuredFromDb = _db.Insured.Find(holderId);
             if (insuredFromDb == null)
@@ -182,7 +185,7 @@ namespace InsuranceRecordsWeb.Controllers
             }
             return View(obj);
         }
-
+        //InsuranceEvent/Delete/id
         //GET
         public IActionResult Delete(int? id)
         {
@@ -196,7 +199,7 @@ namespace InsuranceRecordsWeb.Controllers
             {
                 return RedirectToAction("NotFoundCustom", "Home");
             }
-            //prevents from accessing any InsuranceEvent by any user
+            //prevents from accessing any InsuranceEvent by any user, redirecting to "error" page
             int holderId = insuranceEventFromDb.PolicyHolderId;
             var insuredFromDb = _db.Insured.Find(holderId);
             if (insuredFromDb == null)

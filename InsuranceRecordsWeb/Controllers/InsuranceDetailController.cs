@@ -15,6 +15,7 @@ namespace InsuranceRecordsWeb.Controllers
             _db = db;
             _userManager = userManager;
         }
+        //Insurance detail
         public async Task<IActionResult> InsuranceDetail(int? id)
         {
             if (id == null || id == 0)
@@ -29,7 +30,7 @@ namespace InsuranceRecordsWeb.Controllers
                 return RedirectToAction("NotFoundCustom", "Home");
             }
 
-            //prevents from accessing any Insurance by any user
+            //prevents from accessing any Insurance by any user, redirecting to "error" page
             int insuranceId = insuranceFromDb.InsuranceHolderId;
             var insuredFromDb = _db.Insured.Find(insuranceId);
             if (insuredFromDb == null)
