@@ -1,6 +1,6 @@
 ﻿namespace InsuranceRecordsWeb.Models
 {
-    public class HoldersInsurancesViewModel
+    public class HoldersInsurancesEventsViewModel
     {
         public List<InsuranceModel>? Insurances { get; set; }
         public List<PolicyHolderModel>? PolicyHolders { get; set; }

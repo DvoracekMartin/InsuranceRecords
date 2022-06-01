@@ -66,9 +66,9 @@ namespace InsuranceRecordsWeb.Controllers
             var insuranceEventsFromDb = _db.Event.Where(ev => InsuranceIds.Contains(ev.InsuranceId))
                      .Select(a => a).ToList();
 
-            var holdersInsurancesModel = new HoldersInsurancesViewModel();
+            var holdersInsurancesModel = new HoldersInsurancesEventsViewModel();
 
-            var thisModel = new HoldersInsurancesViewModel();    
+            var thisModel = new HoldersInsurancesEventsViewModel();    
             thisModel.PolicyHolders = insuredFromDb.ToList();
             thisModel.Insurances = insurancesFromDb.ToList();
             thisModel.InsuranceEvents = insuranceEventsFromDb.ToList();

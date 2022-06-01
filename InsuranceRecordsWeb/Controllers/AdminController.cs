@@ -23,13 +23,11 @@ namespace InsuranceRecordsWeb.Controllers
         public IActionResult InsuredList()
         {
             var objInsuredList = _db.Insured.ToList();
-            //List<PolicyHolder> objInsuredList = _db.Insured.ToList();
             return View(objInsuredList);
         }
 
         public IActionResult InsuranceList()
         {
-            //List<Insurance> objInsuredList = _db.Insurance.ToList();
             var objInsuranceList = _db.Insurance.ToList();
             return View(objInsuranceList);
         }
