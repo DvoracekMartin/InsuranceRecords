@@ -45,6 +45,8 @@
                     { 
                         <li class="nav-item"><a class="nav-link"  asp-controller="User" asp-action="Index" 
                         asp-route-id="@UserManager.GetUserId(User)">Pojištěnci</a></li>
+                        <li class="nav-item"><a class="nav-link"  asp-controller="InsuranceEvent" asp-action="Index" 
+                        asp-route-id="@UserManager.GetUserId(User)">Události</a></li>
                     }
                 @if (User.IsInRole("Administrator"))
                     {                  

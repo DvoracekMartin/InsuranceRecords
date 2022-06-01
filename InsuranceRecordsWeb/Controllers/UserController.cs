@@ -45,6 +45,15 @@ namespace InsuranceRecordsWeb.Controllers
             thisModel.TelephoneNumber = user.TelephoneNumber;
             thisModel.PolicyHolders = await GetPolicyHolders(id);
 
+            //prevents from accessing a UserViewModel by any user
+            if (thisModel.PolicyHolders.Count > 0)
+            { 
+                if (thisModel.PolicyHolders.First().UserId != _userManager.GetUserId(User))
+                {
+                    return RedirectToAction("NotFoundCustom", "Home");
+                }
+            }
+
             //pagination
             const int pageSize = 5;
             if (pg < 1)

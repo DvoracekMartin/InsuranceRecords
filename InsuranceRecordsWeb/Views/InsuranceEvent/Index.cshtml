@@ -1,0 +1,87 @@
+﻿@model HoldersInsurancesViewModel
+
+@{
+    ViewData["Title"] = "Moji pojištěnci a pojištění";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    PagerModel pager = new PagerModel();
+    int pageNo = 0;
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+    }
+}
+<div class="container">
+    @*if there's no PolicyHodlers, we skip the loop for listing PolicyHolders/Insured*@
+    @if (Model.PolicyHolders.Count > 0)
+    {        
+        //Liisting all of the PolicyHolders/Insured/Events
+        @foreach (var obj in Model.PolicyHolders)
+        {
+            <div class="row pt-4 align-items-center">
+                    <div class="col-6 col-lg-4 text-uppercase">@obj.Name @obj.LastName</div>                    
+            </div>
+            
+            if (Model.Insurances != null)
+            { 
+                @foreach (var obi in Model.Insurances)
+                {                                                 
+                    @if(obj.Id == obi.InsuranceHolderId)
+                    {                 
+                         <div class="row pt-4 align-items-center">
+                            <div class="col-6 col-sm-5 col-lg-4 px-5">Pojištění @obi.InsuranceType</div>                     
+                            <div class="col-6 col-sm-3 col-lg-4 px-5 px-sm-0">@obi.InsuranceSubject</div> 
+
+                            <div class="col-12  col-sm-4">
+                                <div class="container text-center">
+                                    <div class="d-flex flex-row flex-md-column flex-lg-row justify-content-center justify-content-md-end">
+                                        <div class="p-1"> <a asp-controller="InsuranceEvent" asp-action="Create" asp-route-insuranceId="@obi.Id" 
+                                            class="btn btn-primary" style="width:205px" ><i class="bi bi-pencil-square"></i>&nbsp;Přidat událost</a>
+                                        </div>                
+                                    </div>
+                                </div>
+                            </div>
+                              
+                        </div>
+                    }
+                    if (Model.InsuranceEvents != null)
+                    { 
+                        @foreach (var obe in Model.InsuranceEvents)
+                        {                                                 
+                            @if(obi.Id == obe.InsuranceId && obj.Id == obe.PolicyHolderId)
+                            {                 
+                                 <div class="row pt-4 align-items-center">
+                                    <div class="col-12 col-md-6 px-5">Datum škodné události: @obe.InsuranceEventTime.ToString("dd/MM/yyyy")</div>                     
+                                    <div class="col-12 col-md-6">
+                                        <div class="container text-center">
+                                            <div class="d-flex flex-row justify-content-center justify-content-md-end">
+                                                <div class="p-1"> <a asp-controller="InsuranceEvent" asp-action="Edit" asp-route-id="@obe.Id" 
+                                                    class="btn btn-primary" style="width:160px" ><i class="bi bi-pencil-square"></i>&nbsp;Editovat</a>
+                                                </div>    
+                                                <div class="p-1"><a asp-controller="InsuranceEvent" asp-action="Delete" asp-route-id="@obe.Id" 
+                                                    class="btn btn-danger" style="width:160px"><i class="bi bi-trash"></i>&nbsp;Odstranit</a>
+                                                </div>    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                }
+                 <div class="row px-3 pt-4 align-items-center">
+                    <hr class="border-2 col-6 col-lg-4 border-top border-primary">
+                </div>   
+            }
+        }
+    }
+    else
+    {       
+        <div class="row pt-4 align-items-center">
+            <div class="col-12">Nemáte žádné pojištěnce</div>  
+        </div>     
+    }
+</div>
+
+<partial name="_Pager" model="@pager"/>

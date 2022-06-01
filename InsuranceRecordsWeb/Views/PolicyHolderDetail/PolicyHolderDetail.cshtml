@@ -51,11 +51,12 @@
             @foreach(var obj in Model.Insurances) 
                 {   //Vypsání pojištění
                     <div class="row pt-4 align-items-center">
-                        <div class="col-3 col-sm-3 col-lg-2 px-5 ">@obj.InsuranceType</div>          
-                        <div class="col-3 col-sm-3 col-lg-2 text-center">    
+                        <div class="col-6 col-sm-6 col-lg-4 px-5 ">
+                            <a asp-controller="InsuranceDetail" asp-action="InsuranceDetail" asp-route-id="@obj.Id">@obj.InsuranceType</a></div>          
+                        @*@*<div class="col-3 col-sm-3 col-lg-2 text-center">    
                             <a asp-controller="InsuranceDetail" asp-action="InsuranceDetail" asp-route-id="@obj.Id" 
                             class="btn btn-light"><i class="bi bi-card-text"></i>&nbsp;Detail</a>
-                        </div>       
+                        </div>   *@ 
                         <div class="col-6 col-sm-3 col-lg-4 px-5 px-sm-0">@obj.InsuranceSubject</div> 
 
                         <div class="col-12 col-md-3 col-lg-4">
@@ -95,17 +96,7 @@
             </div>
              <div class="p-1"> <a asp-controller="PolicyHolder" asp-action="Delete" asp-route-id="@Model.PolicyHolderId" 
                 class="btn btn-danger" style="width:300px"><i class="bi bi-trash"></i>&nbsp;Odstranit pojištěnce</a>
-            </div>                 
-             @*<div class="col-md-12">
-               @* <div class="btn-group pt-4" role="group">
-                    <a asp-controller="#" asp-action="#" asp-route-id="#" 
-                    class="btn btn-success" style="width:300px"><i class="bi bi-plus-circle"></i> &nbsp;Přidat pojištění</a>
-                    <a asp-controller="PolicyHolder" asp-action="Edit" asp-route-id="@Model.Id" 
-                    class="btn btn-primary" style="width:300px"><i class="bi bi-pencil-square"></i>&nbsp;Editovat pojištěnce</a>
-                    <a asp-controller="PolicyHolder" asp-action="Delete" asp-route-id="@Model.Id" 
-                    class="btn btn-danger" style="width:300px"><i class="bi bi-trash"></i>&nbsp;Odstranit pojištěnce</a>
-                </div>  
-            </div>*@
+            </div>                           
         </div>
     </div>
     <div class="text-center pt-4">

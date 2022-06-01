@@ -25,11 +25,11 @@
         @foreach (var obj in Model.PolicyHolders)
         {   
             <div class="row pt-4 align-items-center">
-                <div class="col-3 col-lg-2">@obj.Name @obj.LastName</div>          
-                <div class="col-3 col-lg-2 text-center">    
+                <div class="col-6 col-lg-4"><a asp-controller="PolicyHolderDetail" asp-action="PolicyHolderDetail" asp-route-id="@obj.Id">@obj.Name @obj.LastName</a></div>          
+                @*<div class="col-3 col-lg-2 text-center">    
                     <a asp-controller="PolicyHolderDetail" asp-action="PolicyHolderDetail" asp-route-id="@obj.Id" 
                     class="btn btn-light"><i class="bi bi-card-text"></i>&nbsp;Detail</a>
-                </div>       
+                </div>  *@ 
                 <div class="col-6 col-lg-4">@obj.StreetName @obj.BuildingNumber, @obj.CityName, @obj.ZIPCode</div>           
                 <div class="col-12 col-lg-4 d-flex flex-row justify-content-center justify-content-lg-end">                                
                     <div class="p-1"> <a asp-controller="PolicyHolder" asp-action="Edit" asp-route-id="@obj.Id" 
