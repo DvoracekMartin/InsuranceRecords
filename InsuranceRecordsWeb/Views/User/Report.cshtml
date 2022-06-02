@@ -18,8 +18,8 @@
 </head>
 <body class="d-flex flex-column min-vh-100"> 
     @*User*@
-    <h1>Uživatel</h1>
-    <table class="table table-sm" id="tab">
+    <h3>Osobní údaje</h3>
+    <table class="table table-borderless table-sm" id="tab">
         <tbody>
             <tr>
                 <td>Jméno a příjmení:</td>                                    
@@ -30,7 +30,7 @@
                 <td></td>  
             </tr>
             <tr>
-                <td>Emai:</td>
+                <td>Email:</td>
                 <td>@Model.ApplicationUser.Email</td>
                 <td></td>
                 <td>Obec:</td>
@@ -47,26 +47,27 @@
             </tr>
         </tbody>
     </table>
-        
     @*if there's no PolicyHodlers, we skip the loop for listing PolicyHolders/Insured*@
     @if (Model.PolicyHolders.Count > 0)
-    {    
-                
+    {                 
         //Liisting all of the PolicyHolders/Insured/Events
         @foreach (var obj in Model.PolicyHolders)
         {
+        <div class="row px-3 pt-1 align-items-start">
+        <hr class="border-2 col-6 col-lg-4 border-top border-primary">
+        </div> 
+
         @*Insured*@
-        <h4 class="pt-4">Pojištěnec</h4>
-        <table class="table  table-sm" id="tab">
+        <h4 class="pt-1">Pojištěnec</h4>
+        <table class="table table-borderless table-sm" id="tab">
             <tbody>
                 <tr>
                     <td class="width: 16%">Jméno a příjmení:</td>                                    
                     <td class="width: 16%">@obj.Name @obj.LastName</td>
-                    <td class="width: 16%">Emai:</td>
+                    <td class="width: 16%">Email:</td>
                     <td class="width: 16%">@obj.EMail</td>
                     <td class="width: 16%">Mobil:</td>
-                    <td class="width: 16%">@obj.TelephoneNumber</td>
-                            
+                    <td class="width: 16%">@obj.TelephoneNumber</td>                           
                 </tr>
                 <tr>
                     <td class="width: 16%">Bydliště:</td>
@@ -75,8 +76,7 @@
                     <td class="width: 16%">@obj.CityName</td>  
                     <td class="width: 16%">PSČ:</td>
                     <td class="width: 16%">@obj.ZIPCode</td>
-                </tr>
-                       
+                </tr>             
             </tbody>
         </table>
         @*Insurances*@
@@ -88,28 +88,24 @@
                     {
                         <h5 class="pt-4">Pojištění</h5>
                                 
-                            <table class="table  table-sm" id="tab">
+                            <table class="table table-borderless  table-sm" id="tab">
                                 <tbody>
                                     <tr>
-                                        <td class="width: 16%">Pojištění</td>                                    
-                                        <td class="width: 16%">@obi.InsuranceType</td>
-                                        <td class="width: 16%">Předmět:</td>
-                                        <td class="width: 16%">@obi.InsuranceSubject</td>
-                                        <td class="width: 16%">Částka (Kč):</td>
-                                        <td class="width: 16%">@obi.InsuranceAmount</td>
-                            
+                                        <td class="width: 10%">Pojištění</td>                                    
+                                        <td class="width: 10%">@obi.InsuranceType</td>
+                                        <td class="width: 10%">Předmět:</td>
+                                        <td class="width: 10%">@obi.InsuranceSubject</td>
+                                        <td class="width: 10%">Částka (Kč):</td>
+                                        <td class="width: 10%">@obi.InsuranceAmount</td>                         
                                     </tr>
                                     <tr>
                                         <td class="width: 16%">Platnost od:</td>
                                         <td class="width: 16%">@obi.InsuranceValidFrom.ToString("dd/MM/yyyy")</td>
                                         <td class="width: 16%">Platnost do:</td>
-                                        <td class="width: 16%">@obi.InsuranceValidUntil.ToString("dd/MM/yyyy")</td>  
-                                        
-                                    </tr>
-                       
+                                        <td class="width: 16%">@obi.InsuranceValidUntil.ToString("dd/MM/yyyy")</td>                                         
+                                    </tr>      
                                 </tbody>
-                            </table>
-                                
+                            </table>                               
                     }
                     @*Insurance events*@
                     if (Model.InsuranceEvents != null)
@@ -119,24 +115,19 @@
                             @if (obi.Id == obe.InsuranceId && obj.Id == obe.PolicyHolderId)
                             {
                                        
-                                    <table class="table table-sm">
+                                    <table class="table table-borderless table-sm">
                                         <tbody>
                                             <tr>
                                                 <td>Datum škodné události: @obe.InsuranceEventTime.ToString("dd/MM/yyyy")</td>
                                             </tr>
                        
                                         </tbody>
-                                    </table>
-                                        
-                                               
+                                    </table>                                                                                    
                             }
                         }
                     }
                 }
             }
-        <div class="row px-3 pt-4 align-items-center">
-            <hr class="border-2 col-6 col-lg-4 border-top border-primary">
-        </div> 
         }
     }
 </body>
