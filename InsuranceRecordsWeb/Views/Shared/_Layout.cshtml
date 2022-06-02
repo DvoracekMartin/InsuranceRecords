@@ -22,23 +22,6 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-            
-                    @*<li class="nav-item">
-                      <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="InsuredList">Policy Holders</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="InsuranceList">Insurance List</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="IndexRole">Roles</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="CreateRole">Create Role</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="IndexUserRole">User List</a>
-                    </li>*@
-
             <div class="collapse navbar-collapse" id="navbarColor02">
               <ul class="navbar-nav me-auto">
                   @if (User.IsInRole("User") || User.IsInRole("Administrator"))
@@ -72,7 +55,7 @@
         <main role="main" class="pb-3">
             <div class="container">
                 <div class="row pt-4 align-items-center">
-                    <div class="text-center col-12 col-md-6 text-sm-start">
+                    <div class="text-center col-12 col-md-6 text-md-start">
                         <h2 class="text-primary">@ViewData["Title"]</h2>
                     </div>      
                     @*Adding create button on top based on page title*@

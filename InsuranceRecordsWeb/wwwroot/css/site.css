@@ -26,5 +26,9 @@ body {
     opacity: 0.5;
     text-decoration: none;
 }
+#tab {
+    table-layout: fixed;
+    word-wrap: break-word;
+}
 
 

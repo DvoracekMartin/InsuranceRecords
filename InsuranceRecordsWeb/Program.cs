@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using InsuranceRecordsWeb.Areas.Identity.Data;
+using Wkhtmltopdf.NetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
@@ -24,6 +25,7 @@ builder.Services.AddDbContext<InsuranceRecordsWeb.Areas.Identity.Data.Applicatio
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 builder.Services.AddControllersWithViews();
+builder.Services.AddWkhtmltopdf("wkhtmltopdf");
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
