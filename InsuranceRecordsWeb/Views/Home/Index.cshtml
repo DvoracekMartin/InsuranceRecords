@@ -1,8 +1,18 @@
-﻿@{
+﻿@using InsuranceRecordsWeb.Areas.Identity.Data
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@{
     ViewData["Title"] = "Evidence pojištění";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container pt-4"
-    <h1>Pro pokračování se přihlaste, případně zaregistrujte.</h1>
+    @if(!(User.IsInRole("User") || User.IsInRole("Administrator")))
+    {
+        <h1>Pro pokračování se přihlaste, případně zaregistrujte.</h1>
+    }
+    else
+    {
+         <h1>Pokračujte na svůj profil.</h1>
+    }
 </div>
