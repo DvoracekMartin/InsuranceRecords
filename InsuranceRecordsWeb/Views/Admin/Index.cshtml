@@ -14,7 +14,7 @@
      @*if there's no users, we skip the loop for listing them*@
     @if (Model.Users.Count > 0)
     {
-        <h5>Uživatelé</h5>
+        <h5 class="pt-4">Uživatelé</h5>
         //Liisting all of the Users/PolicyHolders/Insured/Events
         @foreach (var obu in Model.Users)
         {
@@ -31,7 +31,7 @@
             <div class="card card-body">
                 <form>
 		        <div class="container">  
-			        <div class="row pt-4">
+			        <div class="row">
 				        <div class="col-md-6 mb-3">
 					        <label asp-for="@obu.Name"></label>
 					        <input asp-for="@obu.Name" class="form-control" readonly/>
@@ -98,7 +98,7 @@
                         <div class="card card-body">
                             <form>
 							<div class="container">  
-								<div class="row pt-4">
+								<div class="row">
 									<div class="col-md-6 mb-3">
 										<label asp-for="@obp.Name"></label>
 										<input asp-for="@obp.Name" class="form-control" readonly/>
@@ -162,7 +162,7 @@
                                 <div class="card card-body">
 									<form>
 									<div class="container">  
-										<div class="row pt-4">
+										<div class="row">
 											<div class="col-md-6 mb-3">
 												<label asp-for="@obi.InsuranceType"></label>
 												<input asp-for="@obi.InsuranceType" class="form-control" readonly/>
@@ -202,7 +202,7 @@
                                         {
 											<form>
 									<div class="container">  
-										<div class="row pt-4">
+										<div class="row">
 											<div class="col-md-6 mb-3">
 												<label asp-for="@obe.InsuranceEventTime"></label>
 												<input asp-for="@obe.InsuranceEventTime" class="form-control" readonly/>
@@ -229,7 +229,7 @@
         i++;
         }
 
-        <h5>Admini</h5>
+        <h5 class="pt-4">Administrátoři</h5>
         @foreach (var obu in Model.Users)
         {
             @if (await @UserManager.IsInRoleAsync(obu, "Administrator"))
