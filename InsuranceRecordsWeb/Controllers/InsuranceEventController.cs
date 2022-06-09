@@ -74,7 +74,7 @@ namespace InsuranceRecordsWeb.Controllers
             thisModel.InsuranceEvents = insuranceEventsFromDb.ToList();
 
             //pagination
-            const int pageSize = 3;
+            const int pageSize = 5;
             if (pg < 1)
             {
                 pg = 1;
