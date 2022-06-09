@@ -66,7 +66,7 @@ namespace InsuranceRecordsWeb.Controllers
             var insuranceEventsFromDb = _db.Event.Where(ev => InsuranceIds.Contains(ev.InsuranceId))
                      .Select(a => a).ToList();
 
-            var holdersInsurancesModel = new HoldersInsurancesEventsViewModel();
+            var holdersInsurancesEventsModel = new HoldersInsurancesEventsViewModel();
 
             var thisModel = new HoldersInsurancesEventsViewModel();    
             thisModel.PolicyHolders = insuredFromDb.ToList();
@@ -84,12 +84,14 @@ namespace InsuranceRecordsWeb.Controllers
             int recSkip = (pg - 1) * pageSize;
 
             thisModel.PolicyHolders = thisModel.PolicyHolders.Skip(recSkip).Take(pager.PageSize).ToList();
-            holdersInsurancesModel = thisModel;
+            holdersInsurancesEventsModel = thisModel;
 
             this.ViewBag.Pager = pager;
 
-            return View(holdersInsurancesModel);
+            return View(holdersInsurancesEventsModel);
         }
+
+
         //InsuranceEvent/Create/id
         //GET
         public IActionResult Create(int? insuranceId)

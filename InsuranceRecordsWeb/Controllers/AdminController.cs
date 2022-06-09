@@ -20,6 +20,40 @@ namespace InsuranceRecordsWeb.Controllers
             _roleManager = roleManager;
             _db = db;
         }
+
+
+        //Listing Users, their Insured and their linked Insurances and Events
+        public async Task<IActionResult> Index()
+        {
+            //getting all Users from db
+            var users = await _userManager.Users.ToListAsync();
+
+            //if (users == null)
+            //{
+            //    return RedirectToAction("NotFoundCustom", "Home");
+            //}
+
+            //getting insured from db
+            var insuredFromDb = _db.Insured.ToList();     
+            //getting insurances from db
+            var insurancesFromDb = _db.Insurance.ToList();
+            //getting events from db
+            var eventsFromDb = _db.Event.ToList();
+
+            var adminUserModel = new AdminUserModel();
+
+            var thisModel = new AdminUserModel();
+            thisModel.Users = users.ToList();
+            thisModel.PolicyHolders = insuredFromDb.ToList();
+            thisModel.Insurances = insurancesFromDb.ToList();
+            thisModel.InsuranceEvents = eventsFromDb.ToList();         
+            adminUserModel = thisModel;
+
+            return View(adminUserModel);
+        }
+
+
+
         public IActionResult InsuredList()
         {
             var objInsuredList = _db.Insured.ToList();
