@@ -26,7 +26,10 @@ namespace InsuranceRecordsWeb.Controllers
         public async Task<IActionResult> Index()
         {
             //getting all Users from db
-            var users = await _userManager.Users.ToListAsync();
+            //var users = await _userManager.Users.ToListAsync();
+            var users = from user in _db.Users
+                        orderby user.LastName
+                        select user;
 
             //if (users == null)
             //{
@@ -51,8 +54,6 @@ namespace InsuranceRecordsWeb.Controllers
 
             return View(adminUserModel);
         }
-
-
 
         public IActionResult InsuredList()
         {
