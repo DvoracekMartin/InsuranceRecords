@@ -4,13 +4,11 @@
     ViewData["Title"] = "Upravit role";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="container">
-    <form method="post">
-        <div class="card">
-            <div class="card-header">               
-                Přidejte/odeberte roli uživatele / @ViewBag.UserName.
-            </div>
-            <div class="card-body">
+
+<form method="post">
+	<div class="container">   		
+		<div class="row pt-4">
+			<div class="col-md-8 col-lg-6 mb-3">
                 @for (int i = 0; i < Model.Count; i++)
                 {
                     <div class="form-check m-1">
@@ -23,11 +21,13 @@
                     </div>
                 }
                 <div asp-validation-summary="All" class="text-danger"></div>
-            </div>
-            <div class="card-footer">
-                <input type="submit" value="Upravit" class="btn btn-primary" style="width:auto" />
-                <a asp-controller="Admin" asp-action="IndexUserRole" class="btn btn-secondary" style="width:auto">Zpět</a>
-            </div>
-        </div>
-    </form>
-</div>
+			</div>
+		</div>
+	</div>
+	<div class="text-center text-sm-start px-3">
+		<button type="submit" class="btn btn-primary" style="width:200px">Upravit</button>
+		<a asp-controller="Admin" asp-action="IndexUserRole" class="btn btn-secondary btn-outline-primary" style="width:200px">
+			Zpět
+		</a>
+	</div>
+</form>
