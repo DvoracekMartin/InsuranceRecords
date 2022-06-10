@@ -44,6 +44,7 @@ namespace InsuranceRecordsWeb.Controllers
             insurance.InsuranceValidFrom = dateTime;
             insurance.InsuranceValidUntil = dateTime;                       
             insurance.InsuranceHolderId = holderId;
+            
             return View(insurance);
         }
         //POST
@@ -85,7 +86,7 @@ namespace InsuranceRecordsWeb.Controllers
             {
                 return RedirectToAction("NotFoundCustom", "Home");
             }
-
+           
             return View(insuranceFromDb);
         }
         //POST
@@ -127,7 +128,7 @@ namespace InsuranceRecordsWeb.Controllers
             {
                 return RedirectToAction("NotFoundCustom", "Home");
             }
-
+          
             return View(insuranceFromDb);
         }
         //POST
