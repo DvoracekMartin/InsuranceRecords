@@ -55,17 +55,156 @@ namespace InsuranceRecordsWeb.Controllers
             return View(adminUserModel);
         }
 
-        public IActionResult InsuredList()
+
+        //PolicyHolder/Edit/id
+        //GET
+        public IActionResult EditPolicyHolder(int? id)
         {
-            var objInsuredList = _db.Insured.ToList();
-            return View(objInsuredList);
+            if (id == null || id == 0)
+            {
+                return RedirectToAction("NotFoundCustom", "Home");
+            }
+            var insuredFromDb = _db.Insured.Find(id);
+
+            if (insuredFromDb == null)
+            {
+                return RedirectToAction("NotFoundCustom", "Home");
+            }
+            //Admin can do that, no point in preventing it
+            //prevents from accessing any PolicyHolder by any user, redirecting to "error" page
+
+            //if (insuredFromDb.UserId != _userManager.GetUserId(User))
+            //{
+            //    return RedirectToAction("NotFoundCustom", "Home");
+            //}
+
+            return View(insuredFromDb);
+        }
+        //POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditPolicyHolder(PolicyHolderModel obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Insured.Update(obj);
+                _db.SaveChanges();
+                TempData["success"] = "Pojištěnec aktualizován.";
+                return RedirectToAction("Index");
+            }
+            return View(obj);
         }
 
-        public IActionResult InsuranceList()
+
+        //Insurance/Edit/id
+        //GET
+        public IActionResult EditInsurance(int? id)
         {
-            var objInsuranceList = _db.Insurance.ToList();
-            return View(objInsuranceList);
+            if (id == null || id == 0)
+            {
+                return RedirectToAction("NotFoundCustom", "Home");
+            }
+            var insuranceFromDb = _db.Insurance.Find(id);
+
+            if (insuranceFromDb == null)
+            {
+                return RedirectToAction("NotFoundCustom", "Home");
+            }
+
+            //Admin can do that, no point in preventing it
+            //prevents from accessing any Insurance by any user, redirecting to "error" page
+
+            //int insuranceId = insuranceFromDb.InsuranceHolderId;
+            //var insuredFromDb = _db.Insured.Find(insuranceId);
+            //if (insuredFromDb == null)
+            //{
+            //    return RedirectToAction("NotFoundCustom", "Home");
+            //}
+            //if (insuredFromDb.UserId != _userManager.GetUserId(User))
+            //{
+            //    return RedirectToAction("NotFoundCustom", "Home");
+            //}
+
+            return View(insuranceFromDb);
         }
+        //POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditInsurance(InsuranceModel obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Insurance.Update(obj);
+                _db.SaveChanges();
+                TempData["success"] = "Pojištění aktualizováno.";
+                return RedirectToAction("Index");
+            }
+            return View(obj);
+        }
+
+        //InsuranceEvent/Edit/id
+        //GET
+        public IActionResult EditInsuranceEvent(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return RedirectToAction("NotFoundCustom", "Home");
+            }
+            var insuranceEventFromDb = _db.Event.Find(id);
+
+            if (insuranceEventFromDb == null)
+            {
+                return RedirectToAction("NotFoundCustom", "Home");
+            }
+            //Admin can do that, no point in preventing it
+            //prevents from accessing any InsuranceEvent by any user, redirecting to "error" page
+
+            //int holderId = insuranceEventFromDb.PolicyHolderId;
+            //var insuredFromDb = _db.Insured.Find(holderId);
+            //if (insuredFromDb == null)
+            //{
+            //    return RedirectToAction("NotFoundCustom", "Home");
+            //}
+            //if (insuredFromDb.UserId != _userManager.GetUserId(User))
+            //{
+            //    return RedirectToAction("NotFoundCustom", "Home");
+            //}
+
+            return View(insuranceEventFromDb);
+        }
+
+        //POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditInsuranceEvent(InsuranceEventModel obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Event.Update(obj);
+                _db.SaveChanges();
+                TempData["success"] = "Pojistná událost aktualizována.";
+                return RedirectToAction("Index");
+            }
+            return View(obj);
+        }
+
+        //public IActionResult InsuredList()
+        //{
+        //    var objInsuredList = _db.Insured.ToList();
+        //    return View(objInsuredList);
+        //}
+
+        //public IActionResult InsuranceList()
+        //{
+        //    var objInsuranceList = _db.Insurance.ToList();
+        //    return View(objInsuranceList);
+        //}
+
+        //public IActionResult InsuranceEventList()
+        //{
+        //    var objInsuranceEventList = _db.Event.ToList();
+        //    return View(objInsuranceEventList);
+        //}
 
         public async Task<IActionResult> IndexRole()
         {

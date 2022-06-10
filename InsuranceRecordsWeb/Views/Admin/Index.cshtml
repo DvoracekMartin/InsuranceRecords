@@ -106,15 +106,19 @@
 							<button class="btn btn-outline-secondary" style="width:250px" type="button" data-bs-toggle="collapse"
 							data-target="#collapseTwoDetail_@p" href="#collapseTwoDetail_@p" aria-expanded="false">
 								Detail
-							</button>
+							</button>							                  
 							</p>
 						}
 
 						<div class="collapse" id="collapseTwoDetail_@p">
 							<div class="card card-body border-0">
+								
 								<form>
 									<div class="container">
-										<div class="row">
+										<div class=""> <a asp-controller="Admin" asp-action="EditPolicyHolder" asp-route-id="@obp.Id" 
+										class="btn btn-outline-primary" style="width:160px" ><i class="bi bi-pencil-square"></i>&nbsp;Editovat</a>
+										</div>
+										<div class="row pt-3">
 											<div class="col-md-6 mb-3">
 												<label asp-for="@obp.Name"></label>
 												<input asp-for="@obp.Name" class="form-control" readonly />
@@ -183,7 +187,10 @@
 										<div class="card card-body border-0">
 											<form>
 												<div class="container">
-													<div class="row">
+													<div class=""> <a asp-controller="Admin" asp-action="EditInsurance" asp-route-id="@obi.Id" 
+													class="btn btn-outline-primary" style="width:160px" ><i class="bi bi-pencil-square"></i>&nbsp;Editovat</a>
+													</div>
+													<div class="row pt-3">
 														<div class="col-md-6 mb-3">
 															<label asp-for="@obi.InsuranceType"></label>
 															<input asp-for="@obi.InsuranceType" class="form-control" readonly />
@@ -223,7 +230,10 @@
 												{
 													<form>
 														<div class="container">
-															<div class="row">
+															<div class=""> <a asp-controller="Admin" asp-action="EditInsuranceEvent" asp-route-id="@obe.Id" 
+															class="btn btn-outline-primary" style="width:160px" ><i class="bi bi-pencil-square"></i>&nbsp;Editovat</a>
+															</div>
+															<div class="row pt-3">
 																<div class="col-md-6 mb-3">
 																	<label asp-for="@obe.InsuranceEventTime"></label>
 																	<input asp-for="@obe.InsuranceEventTime" class="form-control" readonly />
