@@ -219,6 +219,7 @@ namespace InsuranceRecordsWeb.Controllers
             return View(roles);
         }
 
+        //Getting users and their roles
         public async Task<IActionResult> IndexUserRole()
         {
             var users = await _userManager.Users.ToListAsync();
@@ -319,6 +320,7 @@ namespace InsuranceRecordsWeb.Controllers
             return View(manageUserRolesViewModel);
         }
 
+        //Adding/removing roles to users
         //POST
         [HttpPost]
         public async Task<IActionResult> Manage(List<ManageUserRolesViewModel> model, string userId)

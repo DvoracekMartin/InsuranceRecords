@@ -9,6 +9,7 @@
 }
 
 <div class="container">
+	@*variables for collapses in foreach loops*@
 	@{int i = 0;}
 	@{int p = 0;}
 	@{int l = 0;}
@@ -23,17 +24,20 @@
 		{
 			@if (await @UserManager.IsInRoleAsync(obu, "User"))
 			{
+				@*Collapse one*@
 				<p class="text-center text-md-start">
 					<button class="btn btn-primary" style="width:250px" type="button" data-bs-toggle="collapse"
 					data-target="#collapseOne_@i" href="#collapseOne_@i" aria-expanded="false">
 						@obu.Name @obu.LastName
 					</button>
+					@*Collapse detail*@
 					<button class="btn btn-outline-secondary" style="width:250px" type="button" data-bs-toggle="collapse"
 					data-target="#collapseOneDetail_@i" href="#collapseOneDetail_@i" aria-expanded="false">
 						Detail
 					</button>
 				</p>
 			}
+			@*Collapse detail*@
 			<div class="collapse" id="collapseOneDetail_@i">
 				<div class="card card-body border-0">
 					<form>
@@ -90,26 +94,34 @@
 					</form>
 				</div>
 			</div>
+			@*Collapse one*@
 			<div class="collapse" id="collapseOne_@i">
 				<div class="card card-body border-0">
 
 					<h5>Pojištěnci</h5>
+					@*Adding Insured*@
+					<div class="pb-3"><a asp-controller="Admin" asp-action="CreatePolicyHolder" asp-route-userId=@obu.Id 
+						class="btn btn-outline-primary" style="width:160px"><i class="bi bi-plus-circle"></i> &nbsp;Přidat</a>                        
+                    </div>			
+					
 					@foreach (var obp in Model.PolicyHolders)
 					{
 						@if (obu.Id == obp.UserId)
 						{
 							<p>
+							@*Collapse two*@
 							<button class="btn btn-outline-primary" style="width:250px" type="button" data-bs-toggle="collapse"
 							data-target="#collapseTwo_@p" href="#collapseTwo_@p" aria-expanded="false">
 								@obp.Name @obp.LastName
 							</button>
+							@*Collapse detail*@
 							<button class="btn btn-outline-secondary" style="width:250px" type="button" data-bs-toggle="collapse"
 							data-target="#collapseTwoDetail_@p" href="#collapseTwoDetail_@p" aria-expanded="false">
 								Detail
 							</button>							                  
 							</p>
 						}
-
+						@*Collapse detail*@
 						<div class="collapse" id="collapseTwoDetail_@p">
 							<div class="card card-body border-0">
 								
@@ -118,6 +130,9 @@
 										<div class=""> <a asp-controller="Admin" asp-action="EditPolicyHolder" asp-route-id="@obp.Id" 
 										class="btn btn-outline-primary" style="width:160px" ><i class="bi bi-pencil-square"></i>&nbsp;Editovat</a>
 										</div>
+										<div class="pt-3"><a asp-controller="Admin" asp-action="DeletePolicyHolder" asp-route-id="@obp.Id" 
+											class="btn btn-danger" style="width:160px"><i class="bi bi-trash"></i>&nbsp;Odstranit</a>
+										</div>   
 										<div class="row pt-3">
 											<div class="col-md-6 mb-3">
 												<label asp-for="@obp.Name"></label>
@@ -170,26 +185,37 @@
 								</form>
 							</div>
 						</div>
-
+						@*Collapse two*@
 						<div class="collapse" id="collapseTwo_@p">
 							<div class="card card-body border-0">
+
 								<h5>Pojištění</h5>
+								@*Adding Insurance*@
+								<div class="pb-3"><a asp-controller="Admin" asp-action="CreateInsurance" asp-route-Id=@obp.Id 
+									class="btn btn-outline-primary" style="width:160px"><i class="bi bi-plus-circle"></i> &nbsp;Přidat</a>                        
+								</div>	
+
 								@foreach (var obi in Model.Insurances)
 								{
 									@if (obi.InsuranceHolderId == obp.Id)
 									{
+										@*Collapse three*@
 										<button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse"
 										data-target="#collapseThree_@l" href="#collapseThree_@l" aria-expanded="false">
 											Pojištění @obi.InsuranceType: @obi.InsuranceSubject
 										</button>
 									}
+									@*Collapse three*@
 									<div class="collapse" id="collapseThree_@l">
 										<div class="card card-body border-0">
 											<form>
 												<div class="container">
 													<div class=""> <a asp-controller="Admin" asp-action="EditInsurance" asp-route-id="@obi.Id" 
-													class="btn btn-outline-primary" style="width:160px" ><i class="bi bi-pencil-square"></i>&nbsp;Editovat</a>
+														class="btn btn-outline-primary" style="width:160px" ><i class="bi bi-pencil-square"></i>&nbsp;Editovat</a>
 													</div>
+													<div class="pt-3"><a asp-controller="Admin" asp-action="DeleteInsurance" asp-route-id="@obi.Id" 
+														class="btn btn-danger" style="width:160px"><i class="bi bi-trash"></i>&nbsp;Odstranit</a>
+													</div>   
 													<div class="row pt-3">
 														<div class="col-md-6 mb-3">
 															<label asp-for="@obi.InsuranceType"></label>
@@ -224,20 +250,26 @@
 												</div>
 											</form>
 											<h5>Události</h5>
+											<div class="container pb-3" ><a asp-controller="Admin" asp-action="CreateInsuranceEvent" asp-route-userId=@obi.Id 
+												class="btn btn-outline-primary" style="width:160px"><i class="bi bi-plus-circle"></i> &nbsp;Přidat</a>                       
+											</div>
 											@foreach (var obe in Model.InsuranceEvents)
 											{
 												@if (obe.InsuranceId == obi.Id)
 												{
 													<form>
 														<div class="container">
+																
 															<div class=""> <a asp-controller="Admin" asp-action="EditInsuranceEvent" asp-route-id="@obe.Id" 
 															class="btn btn-outline-primary" style="width:160px" ><i class="bi bi-pencil-square"></i>&nbsp;Editovat</a>
 															</div>
+															<div class="pt-3"><a asp-controller="Admin" asp-action="DeleteInsuranceEvent" asp-route-id="@obe.Id" 
+																class="btn btn-danger" style="width:160px"><i class="bi bi-trash"></i>&nbsp;Odstranit</a>
+															</div>   
 															<div class="row pt-3">
 																<div class="col-md-6 mb-3">
 																	<label asp-for="@obe.InsuranceEventTime"></label>
 																	<input asp-for="@obe.InsuranceEventTime" class="form-control" readonly />
-
 																</div>
 															</div>
 
