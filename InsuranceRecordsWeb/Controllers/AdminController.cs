@@ -138,6 +138,17 @@ namespace InsuranceRecordsWeb.Controllers
         {
             if (ModelState.IsValid)
             {
+                var events = from j in _db.Event
+                             where j.PolicyHolderId == obj.Id
+                             select j;
+
+                foreach (var e in events)
+                {
+                    e.PolicyHolderName = obj.Name;
+                    e.PolicyHolderLastName = obj.LastName;
+                    _db.Event.Update(e);
+                }
+
                 _db.Insured.Update(obj);
                 _db.SaveChanges();
                 TempData["success"] = "Pojištěnec aktualizován.";
