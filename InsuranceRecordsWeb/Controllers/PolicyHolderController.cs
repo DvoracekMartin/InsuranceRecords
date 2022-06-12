@@ -1,5 +1,6 @@
 ﻿using InsuranceRecordsWeb.Areas.Identity.Data;
 using InsuranceRecordsWeb.Models;
+using InsuranceRecordsWeb.StaticClasses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -46,13 +47,13 @@ namespace InsuranceRecordsWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                obj.Name = Uppercase(obj.Name.Trim().ToLower());
-                obj.LastName = Uppercase(obj.LastName.Trim().ToLower());
+                obj.Name = Uppercase.UpperCase(obj.Name.Trim().ToLower());
+                obj.LastName = Uppercase.UpperCase(obj.LastName.Trim().ToLower());
                 obj.EMail = obj.EMail.Trim();
                 obj.TelephoneNumber = obj.TelephoneNumber.Trim();
-                obj.StreetName = Uppercase(obj.StreetName.Trim());
+                obj.StreetName = Uppercase.UpperCase(obj.StreetName.Trim());
                 obj.BuildingNumber = obj.BuildingNumber.Trim();
-                obj.CityName = Uppercase(obj.CityName.Trim());
+                obj.CityName = Uppercase.UpperCase(obj.CityName.Trim());
                 obj.ZIPCode = obj.ZIPCode.Trim();
 
                 _db.Insured.Add(obj);
@@ -145,13 +146,7 @@ namespace InsuranceRecordsWeb.Controllers
             TempData["success"] = "Pojištěnec odstraněn.";
             return RedirectToAction("Index", "User", new { id = obj.UserId });
 
-        }
-
-        //Returns string from the parameter with the uppercased first letter 
-        public string Uppercase(string str)
-        {
-            return char.ToUpper(str[0]) + str.Substring(1);
-        }
+        }       
 
     }
 }

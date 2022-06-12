@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using InsuranceRecordsWeb.StaticClasses;
 
 namespace InsuranceRecordsWeb.Areas.Identity.Pages.Account
 {
@@ -131,13 +132,13 @@ namespace InsuranceRecordsWeb.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
-                user.Name = Uppercase(Input.Name.Trim().ToLower());
-                user.LastName = Uppercase(Input.LastName.Trim().ToLower());
+                user.Name = Uppercase.UpperCase(Input.Name.Trim().ToLower());
+                user.LastName = Uppercase.UpperCase(Input.LastName.Trim().ToLower());
                 user.Email = Input.Email.Trim();
                 user.TelephoneNumber = Input.TelephoneNumber.Trim();
-                user.StreetName = Uppercase(Input.StreetName.Trim());
+                user.StreetName = Uppercase.UpperCase(Input.StreetName.Trim());
                 user.BuildingNumber = Input.BuildingNumber.Trim(); 
-                user.CityName = Uppercase(Input.CityName.Trim()); 
+                user.CityName = Uppercase.UpperCase(Input.CityName.Trim()); 
                 user.ZipCode = Input.ZipCode.Trim();
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
@@ -201,12 +202,6 @@ namespace InsuranceRecordsWeb.Areas.Identity.Pages.Account
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
             return (IUserEmailStore<ApplicationUser>)_userStore;
-        }
-
-        //Returns string from the parameter with the uppercased first letter 
-        public string Uppercase(string str)
-        {
-            return char.ToUpper(str[0]) + str.Substring(1);
         }
 
     }
