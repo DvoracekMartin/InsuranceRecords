@@ -24,7 +24,7 @@ namespace InsuranceRecordsWeb.Controllers
             _generatePdf = generatePdf;
         }
 
-
+        #region Index
         //Listing Users, their Insured and their linked Insurances and Events
         public async Task<IActionResult> Index()
         {
@@ -57,7 +57,55 @@ namespace InsuranceRecordsWeb.Controllers
 
             return View(adminUserModel);
         }
+        #endregion
 
+        #region PolicyHolder 
+
+        //PolicyHolder/Create/id
+        //GET
+        public IActionResult CreatePolicyHolder(string? userId)
+        {
+            if (userId == "")
+            {
+                return RedirectToAction("NotFoundCustom", "Home");
+            }
+            //Admin can do that, no point in preventing it
+            //prevents from creating a PolicyHolder under another user, redirecting to "error" page
+
+            //if (userId != _userManager.GetUserId(User))
+            //{
+            //    return RedirectToAction("NotFoundCustom", "Home");
+            //}
+
+            var policyHolder = new PolicyHolderModel();
+            string userHolderId = (string)userId;
+
+            policyHolder.UserId = userHolderId;
+            return View(policyHolder);
+        }
+        //POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreatePolicyHolder(PolicyHolderModel obj)
+        {
+            if (ModelState.IsValid)
+            {
+                obj.Name = Uppercase(obj.Name.Trim().ToLower());
+                obj.LastName = Uppercase(obj.LastName.Trim().ToLower());
+                obj.EMail = obj.EMail.Trim();
+                obj.TelephoneNumber = obj.TelephoneNumber.Trim();
+                obj.StreetName = Uppercase(obj.StreetName.Trim());
+                obj.BuildingNumber = obj.BuildingNumber.Trim();
+                obj.CityName = Uppercase(obj.CityName.Trim());
+                obj.ZIPCode = obj.ZIPCode.Trim();
+
+                _db.Insured.Add(obj);
+                _db.SaveChanges();
+                TempData["success"] = "Pojištěnec uložen.";
+                return RedirectToAction("Index");
+            }
+            return View(obj);
+        }
 
         //PolicyHolder/Edit/id
         //GET
@@ -98,6 +146,98 @@ namespace InsuranceRecordsWeb.Controllers
             return View(obj);
         }
 
+        //PolicyHolder/Delete/id
+        //GET
+        public IActionResult DeletePolicyHolder(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return RedirectToAction("NotFoundCustom", "Home");
+            }
+            var insuredFromDb = _db.Insured.Find(id);
+
+            if (insuredFromDb == null)
+            {
+                return RedirectToAction("NotFoundCustom", "Home");
+            }
+            //Admin can do that, no point in preventing it
+            //prevents from accessing any PolicyHolder by any user, redirecting to "error" page
+
+            //if (insuredFromDb.UserId != _userManager.GetUserId(User))
+            //{
+            //    return RedirectToAction("NotFoundCustom", "Home");
+            //}
+
+            return View(insuredFromDb);
+        }
+        //POST
+        [HttpPost, ActionName("DeletePolicyHolder")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePOSTPolicyHolder(int? id)
+        {
+            var obj = _db.Insured.Find(id);
+            if (obj == null)
+            {
+                return RedirectToAction("NotFoundCustom", "Home");
+            }
+            _db.Insured.Remove(obj);
+            _db.SaveChanges();
+            TempData["success"] = "Pojištěnec odstraněn.";
+            return RedirectToAction("Index");
+        }
+
+        #endregion
+
+        #region Insurance 
+
+        //Insurance/Create/id
+        //GET
+        public IActionResult CreateInsurance(int? userId)
+        {
+            if (userId == null || userId == 0)
+            {
+                return RedirectToAction("NotFoundCustom", "Home");
+            }
+
+            var insuredFromDb = _db.Insured.Find(userId);
+
+            if (insuredFromDb == null)
+            {
+                return RedirectToAction("NotFoundCustom", "Home");
+            }
+            //Admin can do that, no point in preventing it
+            //prevents from creating any Insurance under any user, redirecting to "error" page
+            
+            //if (insuredFromDb.UserId != _userManager.GetUserId(User))
+            //{
+            //    return RedirectToAction("NotFoundCustom", "Home");
+            //}
+
+            var dateTime = DateTime.Now.Date;
+            var insurance = new InsuranceModel();
+            int holderId = (int)userId;
+            insurance.InsuranceValidFrom = dateTime;
+            insurance.InsuranceValidUntil = dateTime;
+            insurance.InsuranceHolderId = holderId;
+
+            ViewBag.Name = insuredFromDb.Name;
+            ViewBag.LastName = insuredFromDb.LastName;
+            return View(insurance);
+        }
+        //POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateInsurance(InsuranceModel obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Insurance.Add(obj);
+                _db.SaveChanges();
+                TempData["success"] = "Pojištění uloženo.";
+                return RedirectToAction("Index");
+            }
+            return View(obj);
+        }
 
         //Insurance/Edit/id
         //GET
@@ -140,6 +280,112 @@ namespace InsuranceRecordsWeb.Controllers
                 _db.Insurance.Update(obj);
                 _db.SaveChanges();
                 TempData["success"] = "Pojištění aktualizováno.";
+                return RedirectToAction("Index");
+            }
+            return View(obj);
+        }
+
+        //Insurance/Delete/id
+        //GET
+        public IActionResult DeleteInsurance(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return RedirectToAction("NotFoundCustom", "Home");
+            }
+            var insuranceFromDb = _db.Insurance.Find(id);
+
+            if (insuranceFromDb == null)
+            {
+                return RedirectToAction("NotFoundCustom", "Home");
+            }
+            //Admin can do that, no point in preventing it
+            //prevents from accessing any Insurance by any user, redirecting to "error" page
+
+            int insuranceId = insuranceFromDb.InsuranceHolderId;
+            var insuredFromDb = _db.Insured.Find(insuranceId);
+            //if (insuredFromDb == null)
+            //{
+            //    return RedirectToAction("NotFoundCustom", "Home");
+            //}
+            //if (insuredFromDb.UserId != _userManager.GetUserId(User))
+            //{
+            //    return RedirectToAction("NotFoundCustom", "Home");
+            //}
+
+            ViewBag.Name = insuredFromDb.Name;
+            ViewBag.LastName = insuredFromDb.LastName;
+            return View(insuranceFromDb);
+        }
+        //POST
+        [HttpPost, ActionName("DeleteInsurance")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePOSTInsurance(int? id)
+        {
+            var obj = _db.Insurance.Find(id);
+            if (obj == null)
+            {
+                return RedirectToAction("NotFoundCustom", "Home");
+            }
+            _db.Insurance.Remove(obj);
+            _db.SaveChanges();
+            TempData["success"] = "Pojištění odstraněno.";
+            return RedirectToAction("Index");
+
+        }
+        #endregion
+
+        #region InsuranceEvent
+
+        //InsuranceEvent/Create/id
+        //GET
+        public IActionResult CreateInsuranceEvent(int? insuranceId)
+        {
+            if (insuranceId == null || insuranceId == 0)
+            {
+                return RedirectToAction("NotFoundCustom", "Home");
+            }
+            var insuranceFromDb = _db.Insurance.Find(insuranceId);
+            if (insuranceFromDb == null)
+            {
+                return RedirectToAction("NotFoundCustom", "Home");
+            }
+            int holderId = insuranceFromDb.InsuranceHolderId;
+            var insuredFromDb = _db.Insured.Find(holderId);
+            if (insuredFromDb == null)
+            {
+                return RedirectToAction("NotFoundCustom", "Home");
+            }
+            //Admin can do that, no point in preventing it
+            //prevents from creating any InsuranceEvent under any user, redirecting to "error" page
+            //if (insuredFromDb.UserId != _userManager.GetUserId(User))
+            //{
+            //    return RedirectToAction("NotFoundCustom", "Home");
+            //}
+
+            var dateTime = DateTime.Now.Date;
+            var insuranceEvent = new InsuranceEventModel();
+            insuranceEvent.InsuranceEventTime = dateTime;
+            insuranceEvent.InsuranceId = insuranceFromDb.Id;
+            insuranceEvent.PolicyHolderId = insuredFromDb.Id;
+            insuranceEvent.PolicyHolderName = insuredFromDb.Name;
+            insuranceEvent.PolicyHolderLastName = insuredFromDb.LastName;
+            insuranceEvent.InsuranceType = insuranceFromDb.InsuranceType;
+            insuranceEvent.InsuranceSubject = insuranceFromDb.InsuranceSubject;
+
+            return View(insuranceEvent);
+        }
+
+        //POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateInsuranceEvent(InsuranceEventModel obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Event.Add(obj);
+                _db.SaveChanges();
+                TempData["success"] = "Pojistná událost uložena.";
                 return RedirectToAction("Index");
             }
             return View(obj);
@@ -191,6 +437,56 @@ namespace InsuranceRecordsWeb.Controllers
             return View(obj);
         }
 
+        //InsuranceEvent/Delete/id
+        //GET
+        public IActionResult DeleteInsuranceEvent(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return RedirectToAction("NotFoundCustom", "Home");
+            }
+            var insuranceEventFromDb = _db.Event.Find(id);
+
+            if (insuranceEventFromDb == null)
+            {
+                return RedirectToAction("NotFoundCustom", "Home");
+            }
+            //Admin can do that, no point in preventing it
+            //prevents from accessing any InsuranceEvent by any user, redirecting to "error" page
+
+            //int holderId = insuranceEventFromDb.PolicyHolderId;
+            //var insuredFromDb = _db.Insured.Find(holderId);
+            //if (insuredFromDb == null)
+            //{
+            //    return RedirectToAction("NotFoundCustom", "Home");
+            //}
+            //if (insuredFromDb.UserId != _userManager.GetUserId(User))
+            //{
+            //    return RedirectToAction("NotFoundCustom", "Home");
+            //}
+
+            return View(insuranceEventFromDb);
+        }
+
+        //POST
+        [HttpPost, ActionName("DeleteInsuranceEvent")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePOSTInsuranceEvent(int? id)
+        {
+            var obj = _db.Event.Find(id);
+            if (obj == null)
+            {
+                return RedirectToAction("NotFoundCustom", "Home");
+            }
+            _db.Event.Remove(obj);
+            _db.SaveChanges();
+            TempData["success"] = "Pojistná událost odstraněna.";
+            return RedirectToAction("Index");
+        }
+
+        #endregion
+
+        #region ÁdminReport
         //Generating PDF Report      
         public async Task<IActionResult> AdminReport()
         {
@@ -211,7 +507,9 @@ namespace InsuranceRecordsWeb.Controllers
 
             return await _generatePdf.GetPdf("Views/Admin/AdminReport.cshtml", adminUserModel);
         }
-       
+        #endregion
+
+        #region Roles
 
         public async Task<IActionResult> IndexRole()
         {
@@ -288,6 +586,9 @@ namespace InsuranceRecordsWeb.Controllers
             return RedirectToAction("IndexRole");
 
         }
+        #endregion
+
+        #region Manage
 
         //GET
         public async Task<IActionResult> Manage(string userId)
@@ -344,6 +645,14 @@ namespace InsuranceRecordsWeb.Controllers
                 return View(model);
             }
             return RedirectToAction("IndexUserRole");
+        }
+
+        #endregion
+
+        //Returns string from the parameter with the uppercased first letter 
+        public string Uppercase(string str)
+        {
+            return char.ToUpper(str[0]) + str.Substring(1);
         }
     }
 }

@@ -18,6 +18,7 @@ namespace InsuranceRecordsWeb.Controllers
             _db = db;
             _userManager = userManager;
         }
+
         //PolicyHolder/Create/id
         //GET
         public IActionResult Create(string? userId)
@@ -61,6 +62,7 @@ namespace InsuranceRecordsWeb.Controllers
             }
             return View(obj);           
         }
+
         //PolicyHolder/Edit/id
         //GET
         public IActionResult Edit(int? id)

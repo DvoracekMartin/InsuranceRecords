@@ -191,7 +191,7 @@
 
 								<h5>Pojištění</h5>
 								@*Adding Insurance*@
-								<div class="pb-3"><a asp-controller="Admin" asp-action="CreateInsurance" asp-route-Id=@obp.Id 
+								<div class="pb-3"><a asp-controller="Admin" asp-action="CreateInsurance" asp-route-userId=@obp.Id 
 									class="btn btn-outline-primary" style="width:160px"><i class="bi bi-plus-circle"></i> &nbsp;Přidat</a>                        
 								</div>	
 
@@ -250,7 +250,7 @@
 												</div>
 											</form>
 											<h5>Události</h5>
-											<div class="container pb-3" ><a asp-controller="Admin" asp-action="CreateInsuranceEvent" asp-route-userId=@obi.Id 
+											<div class="container pb-3" ><a asp-controller="Admin" asp-action="CreateInsuranceEvent" asp-route-insuranceId=@obi.Id 
 												class="btn btn-outline-primary" style="width:160px"><i class="bi bi-plus-circle"></i> &nbsp;Přidat</a>                       
 											</div>
 											@foreach (var obe in Model.InsuranceEvents)
@@ -258,21 +258,19 @@
 												@if (obe.InsuranceId == obi.Id)
 												{
 													<form>
-														<div class="container">
-																
-															<div class=""> <a asp-controller="Admin" asp-action="EditInsuranceEvent" asp-route-id="@obe.Id" 
-															class="btn btn-outline-primary" style="width:160px" ><i class="bi bi-pencil-square"></i>&nbsp;Editovat</a>
-															</div>
-															<div class="pt-3"><a asp-controller="Admin" asp-action="DeleteInsuranceEvent" asp-route-id="@obe.Id" 
-																class="btn btn-danger" style="width:160px"><i class="bi bi-trash"></i>&nbsp;Odstranit</a>
-															</div>   
+														<div class="container">		
 															<div class="row pt-3">
 																<div class="col-md-6 mb-3">
 																	<label asp-for="@obe.InsuranceEventTime"></label>
 																	<input asp-for="@obe.InsuranceEventTime" class="form-control" readonly />
 																</div>
 															</div>
-
+															<div class=""> <a asp-controller="Admin" asp-action="EditInsuranceEvent" asp-route-id="@obe.Id" 
+															class="btn btn-outline-primary" style="width:160px" ><i class="bi bi-pencil-square"></i>&nbsp;Editovat</a>
+															</div>
+															<div class="pt-3"><a asp-controller="Admin" asp-action="DeleteInsuranceEvent" asp-route-id="@obe.Id" 
+																class="btn btn-danger" style="width:160px"><i class="bi bi-trash"></i>&nbsp;Odstranit</a>
+															</div>   
 														</div>
 													</form>
 												}

@@ -151,7 +151,6 @@ namespace InsuranceRecordsWeb.Controllers
             _db.SaveChanges();
             TempData["success"] = "Pojištění odstraněno.";
             return RedirectToAction("PolicyHolderDetail", "PolicyHolderDetail", new { id = obj.InsuranceHolderId });
-
         }
 
 
