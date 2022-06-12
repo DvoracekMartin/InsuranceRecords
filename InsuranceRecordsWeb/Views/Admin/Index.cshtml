@@ -8,7 +8,7 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container">
+<div class="container text-center text-md-start">
 	@*variables for collapses in foreach loops*@
 	@{int i = 0;}
 	@{int p = 0;}
@@ -100,7 +100,8 @@
 
 					<h5>Pojištěnci</h5>
 					@*Adding Insured*@
-					<div class="pb-3"><a asp-controller="Admin" asp-action="CreatePolicyHolder" asp-route-userId=@obu.Id 
+					<div class="pb-4">
+						<a asp-controller="Admin" asp-action="CreatePolicyHolder" asp-route-userId=@obu.Id 
 						class="btn btn-outline-primary" style="width:160px"><i class="bi bi-plus-circle"></i> &nbsp;Přidat</a>                        
                     </div>			
 					
@@ -127,10 +128,10 @@
 								
 								<form>
 									<div class="container">
-										<div class=""> <a asp-controller="Admin" asp-action="EditPolicyHolder" asp-route-id="@obp.Id" 
+										<div class=""> 
+											<a asp-controller="Admin" asp-action="EditPolicyHolder" asp-route-id="@obp.Id" 
 										class="btn btn-outline-primary" style="width:160px" ><i class="bi bi-pencil-square"></i>&nbsp;Editovat</a>
-										</div>
-										<div class="pt-3"><a asp-controller="Admin" asp-action="DeletePolicyHolder" asp-route-id="@obp.Id" 
+										<a asp-controller="Admin" asp-action="DeletePolicyHolder" asp-route-id="@obp.Id" 
 											class="btn btn-danger" style="width:160px"><i class="bi bi-trash"></i>&nbsp;Odstranit</a>
 										</div>   
 										<div class="row pt-3">
@@ -191,7 +192,8 @@
 
 								<h5>Pojištění</h5>
 								@*Adding Insurance*@
-								<div class="pb-3"><a asp-controller="Admin" asp-action="CreateInsurance" asp-route-userId=@obp.Id 
+								<div class="pb-4">
+									<a asp-controller="Admin" asp-action="CreateInsurance" asp-route-userId=@obp.Id 
 									class="btn btn-outline-primary" style="width:160px"><i class="bi bi-plus-circle"></i> &nbsp;Přidat</a>                        
 								</div>	
 
@@ -199,23 +201,23 @@
 								{
 									@if (obi.InsuranceHolderId == obp.Id)
 									{
-										@*Collapse three*@
+										@*Collapse three*@										
 										<button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse"
 										data-target="#collapseThree_@l" href="#collapseThree_@l" aria-expanded="false">
 											Pojištění @obi.InsuranceType: @obi.InsuranceSubject
-										</button>
+										</button>										
 									}
 									@*Collapse three*@
 									<div class="collapse" id="collapseThree_@l">
 										<div class="card card-body border-0">
 											<form>
 												<div class="container">
-													<div class=""> <a asp-controller="Admin" asp-action="EditInsurance" asp-route-id="@obi.Id" 
-														class="btn btn-outline-primary" style="width:160px" ><i class="bi bi-pencil-square"></i>&nbsp;Editovat</a>
+													<div class="">
+														 <a asp-controller="Admin" asp-action="EditInsurance" asp-route-id="@obi.Id" 
+															class="btn btn-outline-primary" style="width:160px" ><i class="bi bi-pencil-square"></i>&nbsp;Editovat</a>														
+														<a asp-controller="Admin" asp-action="DeleteInsurance" asp-route-id="@obi.Id" 
+															class="btn btn-danger" style="width:160px"><i class="bi bi-trash"></i>&nbsp;Odstranit</a>										
 													</div>
-													<div class="pt-3"><a asp-controller="Admin" asp-action="DeleteInsurance" asp-route-id="@obi.Id" 
-														class="btn btn-danger" style="width:160px"><i class="bi bi-trash"></i>&nbsp;Odstranit</a>
-													</div>   
 													<div class="row pt-3">
 														<div class="col-md-6 mb-3">
 															<label asp-for="@obi.InsuranceType"></label>
@@ -250,7 +252,7 @@
 												</div>
 											</form>
 											<h5>Události</h5>
-											<div class="container pb-3" ><a asp-controller="Admin" asp-action="CreateInsuranceEvent" asp-route-insuranceId=@obi.Id 
+											<div class="container"><a asp-controller="Admin" asp-action="CreateInsuranceEvent" asp-route-insuranceId=@obi.Id 
 												class="btn btn-outline-primary" style="width:160px"><i class="bi bi-plus-circle"></i> &nbsp;Přidat</a>                       
 											</div>
 											@foreach (var obe in Model.InsuranceEvents)
@@ -265,10 +267,11 @@
 																	<input asp-for="@obe.InsuranceEventTime" class="form-control" readonly />
 																</div>
 															</div>
-															<div class=""> <a asp-controller="Admin" asp-action="EditInsuranceEvent" asp-route-id="@obe.Id" 
-															class="btn btn-outline-primary" style="width:160px" ><i class="bi bi-pencil-square"></i>&nbsp;Editovat</a>
-															</div>
-															<div class="pt-3"><a asp-controller="Admin" asp-action="DeleteInsuranceEvent" asp-route-id="@obe.Id" 
+															<div class=""> 
+																<a asp-controller="Admin" asp-action="EditInsuranceEvent" asp-route-id="@obe.Id" 
+																class="btn btn-outline-primary" style="width:160px" ><i class="bi bi-pencil-square"></i>&nbsp;Editovat</a>
+															
+																<a asp-controller="Admin" asp-action="DeleteInsuranceEvent" asp-route-id="@obe.Id" 
 																class="btn btn-danger" style="width:160px"><i class="bi bi-trash"></i>&nbsp;Odstranit</a>
 															</div>   
 														</div>
