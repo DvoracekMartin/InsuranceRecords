@@ -56,6 +56,33 @@ namespace InsuranceRecordsWeb.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Insured",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EMail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TelephoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StreetName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BuildingNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ZIPCode = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Insured", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Insured_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onUpdate: ReferentialAction.Cascade,
+                        onDelete: ReferentialAction.Cascade);
+                });
+            migrationBuilder.CreateTable(
                 name: "Insurance",
                 columns: table => new
                 {
@@ -71,27 +98,15 @@ namespace InsuranceRecordsWeb.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Insurance", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Insurance_InsuredId",
+                        column: x => x.InsuranceHolderId,
+                        principalTable: "Insured",
+                        principalColumn: "Id",
+                        onUpdate: ReferentialAction.Cascade,
+                        onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Insured",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EMail = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TelephoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StreetName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BuildingNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ZIPCode = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Insured", x => x.Id);
-                });
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
@@ -200,6 +215,16 @@ namespace InsuranceRecordsWeb.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Insured_UserId",
+                table: "Insured",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Insurance_InsuredId",
+                table: "Insurance",
+                column: "InsuranceHolderId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -236,7 +261,76 @@ namespace InsuranceRecordsWeb.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                filter: "[NormalizedUserName] IS NOT NULL");       
+
+            //migrationBuilder.InsertData(
+            //table: "AspNetRoles",
+            //columns: new[] { "Id", "Name", "NormalizedName", "ConcurrencyStamp" },
+            //values: new object[,]
+            //{
+            //    { "8f04fd4c-0e74-4647-9767-d75478798b1e", "User", "USER", "594fd5cf-edfe-48ae-b4a0-60febea24b05" },
+            //    { "e01cf6ba-bd8c-4446-a085-bfb03b534332", "Administrator", "ADMINISTRATOR", "f5b61ddf-5e3f-43a0-8513-e71a75d0fcc5" }
+            //});
+
+            //migrationBuilder.InsertData(
+            //table: "AspNetUsers",
+            //columns: new[] 
+            //{  
+            //    "Id",
+            //    "Name",
+            //    "LastName",
+            //    "StreetName",
+            //    "BuildingNumber",
+            //    "CityName",
+            //    "ZipCode",
+            //    "Email",
+            //    "TelephoneNumber",
+            //    "UserName",
+            //    "NormalizedUserName",
+            //    "NormalizedEmail",
+            //    "EmailConfirmed",
+            //    "PasswordHash",
+            //    "SecurityStamp",
+            //    "ConcurrencyStamp",
+            //    "PhoneNumber",
+            //    "PhoneNumberConfirmed",
+            //    "TwoFactorEnabled",
+            //    "LockoutEnd",
+            //    "LockoutEnabled",
+            //    "AccessFailedCount"
+            //},
+            //values: new object[]           
+            //{
+            //    "472f8bb0-3e16-4e03-9635-9250038bd255",
+            //    "Karel",
+            //    "Svoboda",
+            //    "Náměstí 28. října",
+            //    "1843/7",
+            //    "Brno",
+            //    "60200",
+            //    "admin@test.com",
+            //    "123456789",
+            //    "admin@test.com",
+            //    "ADMIN@TEST.COM",
+            //    "NULL",
+            //    false,
+            //    "AQAAAAEAACcQAAAAEMhP8zhpQobLkSrVLNqEbdgCB3X643M5Ie1Ant7CNr9Zr4MkhbyVvu4KxoJh6z8xoA==",
+            //    "NAIGI6QZQYH5NDFBINC3HQCALSDMCQHG",
+            //    "1161a309-9178-4aaa-a472-92c884f0b3f0",
+            //    "NULL",
+            //    false,
+            //    false,
+            //    "NULL",
+            //    true,
+            //    false
+            //});
+
+            //migrationBuilder.InsertData(
+            //table: "AspNetUserRoles",
+            //columns: new[] { "UserId", "RoleId" },
+            //values: new object[]
+            //{ "472f8bb0-3e16-4e03-9635-9250038bd255", "594fd5cf-edfe-48ae-b4a0-60febea24b05" }
+            //);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
