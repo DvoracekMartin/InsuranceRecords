@@ -8,13 +8,24 @@ namespace InsuranceRecordsWeb.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            //Inserting User and Admin roles and Administrator User
             migrationBuilder.InsertData(
             table: "AspNetRoles",
             columns: new[] { "Id", "Name", "NormalizedName", "ConcurrencyStamp" },
             values: new object[,]
             {
-                { "8f04fd4c-0e74-4647-9767-d75478798b1e", "User", "USER", "594fd5cf-edfe-48ae-b4a0-60febea24b05" },
-                { "e01cf6ba-bd8c-4446-a085-bfb03b534332", "Administrator", "ADMINISTRATOR", "f5b61ddf-5e3f-43a0-8513-e71a75d0fcc5" }
+                { 
+                    "8f04fd4c-0e74-4647-9767-d75478798b1e", 
+                    "User", 
+                    "USER", 
+                    "594fd5cf-edfe-48ae-b4a0-60febea24b05" 
+                },
+                { 
+                    "e01cf6ba-bd8c-4446-a085-bfb03b534332", 
+                    "Administrator", 
+                    "ADMINISTRATOR", 
+                    "f5b61ddf-5e3f-43a0-8513-e71a75d0fcc5"
+                }
             });
 
             migrationBuilder.InsertData(
@@ -74,7 +85,10 @@ namespace InsuranceRecordsWeb.Migrations
             table: "AspNetUserRoles",
             columns: new[] { "UserId", "RoleId" },
             values: new object[]
-            { "472f8bb0-3e16-4e03-9635-9250038bd255", "e01cf6ba-bd8c-4446-a085-bfb03b534332" }
+            { 
+                "472f8bb0-3e16-4e03-9635-9250038bd255", 
+                "e01cf6ba-bd8c-4446-a085-bfb03b534332" 
+            }
             );
         }
 
