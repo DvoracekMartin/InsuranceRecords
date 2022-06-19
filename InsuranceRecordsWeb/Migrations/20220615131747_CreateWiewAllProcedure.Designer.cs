@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InsuranceRecordsWeb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220527213322_AddPolicyHolderUserId")]
-    partial class AddPolicyHolderUserId
+    [Migration("20220615131747_CreateWiewAllProcedure")]
+    partial class CreateWiewAllProcedure
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -120,7 +120,45 @@ namespace InsuranceRecordsWeb.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("InsuranceRecordsWeb.Models.Insurance", b =>
+            modelBuilder.Entity("InsuranceRecordsWeb.Models.InsuranceEventModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("InsuranceEventTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("InsuranceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("InsuranceSubject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InsuranceType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PolicyHolderId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PolicyHolderLastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PolicyHolderName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Event");
+                });
+
+            modelBuilder.Entity("InsuranceRecordsWeb.Models.InsuranceModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -154,7 +192,7 @@ namespace InsuranceRecordsWeb.Migrations
                     b.ToTable("Insurance");
                 });
 
-            modelBuilder.Entity("InsuranceRecordsWeb.Models.PolicyHolder", b =>
+            modelBuilder.Entity("InsuranceRecordsWeb.Models.PolicyHolderModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

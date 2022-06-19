@@ -26,7 +26,32 @@ namespace InsuranceRecordsWeb.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Event", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_InsuranceEvent_InsuranceId",
+                        column: x => x.InsuranceId,
+                        principalTable: "Insurance",
+                        principalColumn: "Id",
+                        onUpdate: ReferentialAction.Cascade,
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_InsuranceEvent_PolicyHolderId",
+                        column: x => x.PolicyHolderId,
+                        principalTable: "Insured",
+                        principalColumn: "Id",
+                        onUpdate: ReferentialAction.NoAction,
+                        onDelete: ReferentialAction.NoAction);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InsuranceEvent_InsuranceId",
+                table: "Event",
+                column: "InsuranceId");
+
+            migrationBuilder.CreateIndex(
+               name: "IX_InsuranceEvent_PolicyHolderId",
+               table: "Event",
+               column: "PolicyHolderId");
+
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
