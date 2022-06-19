@@ -76,12 +76,5 @@ namespace InsuranceRecordsWeb.Controllers
                                     select i;
             return insuranecOfHolder.ToList();
         }
-
-
-
-
-
-
-
     }
 }

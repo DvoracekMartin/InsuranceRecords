@@ -145,8 +145,6 @@ namespace InsuranceRecordsWeb.Controllers
             _db.SaveChanges();
             TempData["success"] = "Pojištěnec odstraněn.";
             return RedirectToAction("Index", "User", new { id = obj.UserId });
-
         }       
-
     }
 }
