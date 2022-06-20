@@ -34,9 +34,9 @@ namespace InsuranceRecordsWeb.Controllers
             {
                 return RedirectToAction("NotFoundCustom", "Home");
             }
-            var userViewModel = new UserViewModel();        
+            UserViewModel userViewModel = new UserViewModel();        
 
-            var thisModel = new UserViewModel();
+            UserViewModel thisModel = new UserViewModel();
             thisModel.UserId = user.Id;
             thisModel.Name = user.Name;
             thisModel.LastName = user.LastName;
@@ -127,9 +127,9 @@ namespace InsuranceRecordsWeb.Controllers
             var insuranceEventsFromDb = _db.Event.Where(ev => InsuranceIds.Contains(ev.InsuranceId))
                      .Select(a => a).ToList();
 
-            var userReportModel = new UserReportModel();
+            UserReportModel userReportModel = new UserReportModel();
 
-            var thisModel = new UserReportModel();
+            UserReportModel thisModel = new UserReportModel();
             thisModel.ApplicationUser = user;
             thisModel.PolicyHolders = insuredFromDb.ToList();
             thisModel.Insurances = insurancesFromDb.ToList();

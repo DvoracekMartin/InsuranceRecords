@@ -34,7 +34,7 @@ namespace InsuranceRecordsWeb.Controllers
                 return RedirectToAction("NotFoundCustom", "Home");
             }
 
-            var policyHolder = new PolicyHolderModel();
+            PolicyHolderModel policyHolder = new PolicyHolderModel();
             string userHolderId = (string)userId;
             
             policyHolder.UserId = userHolderId;

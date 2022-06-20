@@ -118,7 +118,7 @@ namespace InsuranceRecordsWeb.Controllers
             }
 
             var dateTime = DateTime.Now.Date;
-            var insuranceEvent = new InsuranceEventModel();
+            InsuranceEventModel insuranceEvent = new InsuranceEventModel();
             insuranceEvent.InsuranceEventTime = dateTime;            
             insuranceEvent.InsuranceId = insuranceFromDb.Id;
             insuranceEvent.PolicyHolderId = insuredFromDb.Id;

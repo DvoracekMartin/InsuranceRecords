@@ -39,7 +39,7 @@ namespace InsuranceRecordsWeb.Controllers
             }
 
             var dateTime = DateTime.Now.Date;
-            var insurance = new InsuranceModel();
+            InsuranceModel insurance = new InsuranceModel();
             int holderId = (int)userId;
             insurance.InsuranceValidFrom = dateTime;
             insurance.InsuranceValidUntil = dateTime;                       

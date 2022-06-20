@@ -47,9 +47,9 @@ namespace InsuranceRecordsWeb.Controllers
             //getting events from db
             var eventsFromDb = _db.Event.ToList();
 
-            var adminUserModel = new AdminUserModel();
+            AdminUserModel adminUserModel = new AdminUserModel();
 
-            var thisModel = new AdminUserModel();
+            AdminUserModel thisModel = new AdminUserModel();
             thisModel.Users = users.ToList();
             thisModel.PolicyHolders = insuredFromDb.ToList();
             thisModel.Insurances = insurancesFromDb.ToList();
@@ -78,7 +78,7 @@ namespace InsuranceRecordsWeb.Controllers
             //    return RedirectToAction("NotFoundCustom", "Home");
             //}
 
-            var policyHolder = new PolicyHolderModel();
+            PolicyHolderModel policyHolder = new PolicyHolderModel();
             string userHolderId = (string)userId;
 
             policyHolder.UserId = userHolderId;
@@ -226,7 +226,7 @@ namespace InsuranceRecordsWeb.Controllers
             //}
 
             var dateTime = DateTime.Now.Date;
-            var insurance = new InsuranceModel();
+            InsuranceModel insurance = new InsuranceModel();
             int holderId = (int)userId;
             insurance.InsuranceValidFrom = dateTime;
             insurance.InsuranceValidUntil = dateTime;
@@ -376,7 +376,7 @@ namespace InsuranceRecordsWeb.Controllers
             //}
 
             var dateTime = DateTime.Now.Date;
-            var insuranceEvent = new InsuranceEventModel();
+            InsuranceEventModel insuranceEvent = new InsuranceEventModel();
             insuranceEvent.InsuranceEventTime = dateTime;
             insuranceEvent.InsuranceId = insuranceFromDb.Id;
             insuranceEvent.PolicyHolderId = insuredFromDb.Id;
@@ -498,7 +498,7 @@ namespace InsuranceRecordsWeb.Controllers
 
         #endregion
 
-        #region ÁdminReport
+        #region AdminReport
         //Generating PDF Report      
         public async Task<IActionResult> AdminReport()
         {
@@ -508,9 +508,9 @@ namespace InsuranceRecordsWeb.Controllers
             var objInsuredList = _db.Insured.ToList();
             var objInsuranceList = _db.Insurance.ToList();
             var objInsuranceEventList = _db.Event.ToList();
-            var adminUserModel = new AdminUserModel();
+            AdminUserModel adminUserModel = new AdminUserModel();
 
-            var thisModel = new AdminUserModel();
+            AdminUserModel thisModel = new AdminUserModel();
             thisModel.Users = users.ToList();
             thisModel.PolicyHolders = objInsuredList.ToList();
             thisModel.Insurances = objInsuranceList.ToList();
