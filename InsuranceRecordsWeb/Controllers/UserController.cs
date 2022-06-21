@@ -21,7 +21,7 @@ namespace InsuranceRecordsWeb.Controllers
             _db = db;
             _generatePdf = generatePdf; 
         }
-        //Listing Policy Holders/Insured linked to user
+        //Listing Policy Holders linked to user
         public async Task<IActionResult> Index(string? id, int pg=1)
         {
             if (id == "")
@@ -48,7 +48,7 @@ namespace InsuranceRecordsWeb.Controllers
             thisModel.TelephoneNumber = user.TelephoneNumber;
             thisModel.PolicyHolders = await GetPolicyHolders(id);
 
-            //prevents from accessing a UserViewModel by any user, redirecting to "error" page
+            //prevents from accessing a the page by any user, redirecting to "error" page
             if (thisModel.PolicyHolders.Count > 0)
             { 
                 if (thisModel.PolicyHolders.First().UserId != _userManager.GetUserId(User))

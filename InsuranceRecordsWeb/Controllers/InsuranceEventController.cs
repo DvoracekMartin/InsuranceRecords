@@ -20,7 +20,7 @@ namespace InsuranceRecordsWeb.Controllers
             _userManager = userManager;
         }
 
-        //Listing Policy Holders/Insured and their linked Insurances
+        //Listing Policy Holders and their linked Insurances
         public async Task<IActionResult> Index(string? id, int pg = 1)
         {
             if (id == "")
@@ -37,7 +37,7 @@ namespace InsuranceRecordsWeb.Controllers
                                 where i.UserId == user.Id
                                 select i;
 
-            //prevents from accessing a HoldersInsurancesViewModel by any user, redirecting to "error" page
+            //prevents from accessing the page by any user, redirecting to "error" page
             if (insuredFromDb.Count() > 0)
             {
                 if (insuredFromDb.First().UserId != _userManager.GetUserId(User))

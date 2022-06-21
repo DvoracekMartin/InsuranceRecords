@@ -16,7 +16,7 @@ namespace InsuranceRecordsWeb.Controllers
             _db = db;
             _userManager = userManager;
         }
-        //Policy holder/Insured detail with linked Insurances
+        //Policy holder detail with linked Insurances
         public async Task<IActionResult> PolicyHolderDetail(int? id, int pg = 1)
         {
             if (id == null || id == 0)
@@ -30,7 +30,7 @@ namespace InsuranceRecordsWeb.Controllers
                 return RedirectToAction("NotFoundCustom", "Home");
             }
 
-            //prevents from accessing a PolicyHolder by any user, redirecting to "error" page
+            //prevents from accessing a PolicyHolder detail by any user, redirecting to "error" page
             if (insuredFromDb.UserId != _userManager.GetUserId(User))
             {
                 return RedirectToAction("NotFoundCustom", "Home");

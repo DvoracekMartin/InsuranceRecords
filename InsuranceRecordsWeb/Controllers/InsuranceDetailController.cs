@@ -15,7 +15,7 @@ namespace InsuranceRecordsWeb.Controllers
             _db = db;
             _userManager = userManager;
         }
-        //Insurance detail
+        //InsuranceDetail/id
         public async Task<IActionResult> InsuranceDetail(int? id)
         {
             if (id == null || id == 0)
