@@ -91,7 +91,6 @@ namespace InsuranceRecordsWeb.Controllers
             return View(holdersInsurancesEventsModel);
         }
 
-
         //InsuranceEvent/Create/id
         //GET
         public IActionResult Create(int? insuranceId)
