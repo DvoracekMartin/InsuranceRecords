@@ -20,7 +20,7 @@ namespace InsuranceRecordsWeb.Controllers
             _userManager = userManager;
         }
 
-        //Listing Policy Holders and their linked Insurances
+        //Listing Insured and their linked Insurances
         public async Task<IActionResult> Index(string? id, int pg = 1)
         {
             if (id == "")
