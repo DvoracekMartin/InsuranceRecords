@@ -82,8 +82,6 @@ namespace InsuranceRecordsWeb.Controllers
             return policyHolders.ToList();
         }
 
-
-
         //Generating PDF Report      
         public async Task<IActionResult> Report()
         {
