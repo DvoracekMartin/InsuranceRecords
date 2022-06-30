@@ -1,5 +1,4 @@
-# Insurance Records
-###### Insurance Records Web application 
+# Insurance Records Web application  
 
 **Instructions:**
 
