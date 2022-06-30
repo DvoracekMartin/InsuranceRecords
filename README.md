@@ -5,7 +5,7 @@
 **Instrukce:**
 
 Před prvním spuštěním aplikace, otevřete **Package Manager Console** a aktualizujte databázi příkazem:  
-"update-database"
+"update-database"  
 Tímto budou vytvořeny dvě uživatelské role (User a Administrator) a jeden účet administrátora.
 
 **Přihlašovací údaje administrátora:**  
@@ -40,7 +40,7 @@ Tímto budou vytvořeny dvě uživatelské role (User a Administrator) a jeden �
 **Instructions:**
 
 Before the first start of the application, open **Package Manager Console** and update the database by typing:  
-"update-database"
+"update-database"  
 Two roles (User and Administrator) and one Administrator account will be created upon this initialization.
 
 **Login for Administrator:**  
