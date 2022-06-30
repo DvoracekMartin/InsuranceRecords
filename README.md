@@ -65,3 +65,16 @@ Two roles (User and Administrator) and one Administrator account will be created
     * Administrator has full access to data and can edit the data
 * is fully responsive
 * generates user reports as PDF file     
+
+<br/>
+
+**Ukázky aplikace / Screenshots from the appliacation:**
+
+<img src="https://user-images.githubusercontent.com/107428797/176625448-c05c7ef7-b166-4898-b1c5-f3e7d2df7fd8.png" width="46.5%"></img>
+<img src="https://user-images.githubusercontent.com/107428797/176625455-a41dbcde-fa4d-4266-b350-62d4ede6a5cf.png" width="46.5%"></img>
+<img src="https://user-images.githubusercontent.com/107428797/176625460-e3fb584e-67ad-43e3-9e09-9ef583a32cd3.png" width="46.5%"></img>
+<img src="https://user-images.githubusercontent.com/107428797/176625467-f2f0f8d2-0495-4003-8e18-09717b62d439.png" width="46.5%"></img>
+<img src="https://user-images.githubusercontent.com/107428797/176625452-ea58d42a-2ddf-4fc9-8d6b-bb45c3ca7525.png" width="23%"></img>
+<img src="https://user-images.githubusercontent.com/107428797/176625458-d9f14008-8a03-4f0b-84b0-15c2d8f0d922.png" width="23%"></img>
+<img src="https://user-images.githubusercontent.com/107428797/176625465-e22f992f-cdfe-408f-bc1e-ffc563a8ec5d.png" width="23%"></img>
+<img src="https://user-images.githubusercontent.com/107428797/176625472-541ad508-fed2-48a2-886d-bda1605fe11b.png" width="23%"></img>
