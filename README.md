@@ -76,5 +76,5 @@ Two roles (User and Administrator) and one Administrator account will be created
 <img src="https://user-images.githubusercontent.com/107428797/176625467-f2f0f8d2-0495-4003-8e18-09717b62d439.png" width="46.5%"></img>
 <img src="https://user-images.githubusercontent.com/107428797/176625452-ea58d42a-2ddf-4fc9-8d6b-bb45c3ca7525.png" width="23%"></img>
 <img src="https://user-images.githubusercontent.com/107428797/176625458-d9f14008-8a03-4f0b-84b0-15c2d8f0d922.png" width="23%"></img>
-<img src="https://user-images.githubusercontent.com/107428797/176625465-e22f992f-cdfe-408f-bc1e-ffc563a8ec5d.png" width="23%"></img>
+<img src="https://user-images.githubusercontent.com/107428797/176628293-2ec803ad-a30e-4fd8-91f9-a6ca4ac536e4.png" width="23%"></img>
 <img src="https://user-images.githubusercontent.com/107428797/176625472-541ad508-fed2-48a2-886d-bda1605fe11b.png" width="23%"></img>
