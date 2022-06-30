@@ -68,7 +68,7 @@ Two roles (User and Administrator) and one Administrator account will be created
 
 <br/>
 
-**Ukázky aplikace / Screenshots from the appliacation:**
+**Ukázky aplikace / Screenshots from the application:**
 
 <img src="https://user-images.githubusercontent.com/107428797/176625448-c05c7ef7-b166-4898-b1c5-f3e7d2df7fd8.png" width="46.5%"></img>
 <img src="https://user-images.githubusercontent.com/107428797/176625455-a41dbcde-fa4d-4266-b350-62d4ede6a5cf.png" width="46.5%"></img>
